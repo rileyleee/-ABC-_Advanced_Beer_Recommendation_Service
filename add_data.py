@@ -12,7 +12,7 @@ from search.models import Beer
 beer = Beer()
 beer_list = []
 
-with open('final_train_beer_rating.csv', encoding='utf8') as csv_file_beer:
+with open('final_proj_train_beer_ratings.csv', encoding='utf8') as csv_file_beer:
     rows = csv.reader(csv_file_beer)
     next(rows, None)
     for row in rows:
