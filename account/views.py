@@ -3,11 +3,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
+from django.views.generic import CreateView
+
 from account.forms import SignupForm
 
-login = LoginView.as_view(template_name="search/search_page.html")
+login = LoginView.as_view(template_name="account/login.html")
 
 logout = LogoutView.as_view(next_page="/account/login/")
+
 
 def signup(request):
     if request.method == "POST":
@@ -18,7 +21,17 @@ def signup(request):
             return redirect('/search/')
     else:
         form = SignupForm()
-    return render(request, 'account/signup.html', {'form': form})
+    return render(request, 'account/signup.html', {
+        'form': form,
+    })
+
+
+# 오승이네 코드
+# signup = CreateView.as_view(
+#     form_class=SignupForm,
+#     success_url="/account/login/",  # 회원가입시 login화면으로 ㄱㄱ
+#     template_name="account/signup.html",
+# )
 
 def mypage_edit(request):
     user = request.user
@@ -29,13 +42,14 @@ def mypage_edit(request):
             user = form.save()
             messages.success(request, "successfully modified")
 
-            return redirect(f"/account/mypage/")
+            return redirect(f"/account/mypage/")  # 마이페이지가 로그인 필수사항이라 로그인 요청 뜸
     else:
         form = SignupForm(instance=user)
 
     return render(request, "account/mypage_edit.html", {
         "form": form,
     })
+
 
 @login_required
 @require_http_methods(['GET', 'POST'])

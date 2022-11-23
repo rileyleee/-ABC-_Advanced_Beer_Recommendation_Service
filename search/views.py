@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.db.models import Q
 from search.models import Beer
@@ -19,6 +20,9 @@ def search(request):
     # TODO: 2개의 뷰로 분리하는 것이 낫습니다. => 그럼 아래의 조건문이 필요가 없고, 보다 뷰가 간결해집니다.
 
     beer_list = Beer.objects.all()
+    paginator = Paginator(beer_list, '20')
+    page = request.GET.get('page', 1)
+    pagenated_beer_list = paginator.get_page((page))
     query = request.GET.get('search', '')  # 일반적으로는 q나 query이름을 씁니다.
     ch_category_list = request.GET.getlist("chCategory")
     ch_country_list = request.GET.getlist("chCountry")
@@ -58,8 +62,10 @@ def search(request):
         kind_list = kind_list.filter(
             Q(kind__icontains=predict_beer))[:10]
 
-    return render(request, template_name, {'beer_list': beer_list, 'search': query, 'predict_beer': predict_beer, 'kind_list':kind_list})
+    context_beer_list = {'beer_list': beer_list, 'pagenated_beer_list': pagenated_beer_list, 'search': query,
+                         'predict_beer': predict_beer, 'kind_list': kind_list}
 
+    return render(request, template_name, context=context_beer_list)
 
 
 @login_required
@@ -118,5 +124,3 @@ def recommend(request):
         'search/recommend.html',
         {'review_ranking': review_ranking, 'average_ranking': average_ranking}
     )
-
-

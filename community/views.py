@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from community.models import Column, Event
 from community.forms import ColumnForm, EventForm
@@ -8,12 +9,11 @@ from community.forms import ColumnForm, EventForm
 @login_required
 def columns(request):
     column_qu = Column.objects.all().order_by('-pk')
-    return render(
-        request,
-        'community/column.html',
-        {
-            'column_list': column_qu,
-        })
+    paginator = Paginator(column_qu, '3')
+    page = request.GET.get('page', 1)
+    pagenated_column_qu = paginator.get_page(page)
+    context_col = {'column_list': column_qu, 'pagenated_column_qu': pagenated_column_qu}
+    return render(request, template_name='community/column.html', context=context_col)
 
 
 @login_required
@@ -58,14 +58,15 @@ def column_edit(request, pk):
     })
 
 
-
 @login_required
 def events(request):
     event_qu = Event.objects.all().order_by('-pk')
-    return render(request, "community/event.html",
-                  {
-                      'event_list': event_qu,
-                  })
+    paginator = Paginator(event_qu, '3')
+    page = request.GET.get('page', 1)
+    pagenated_event_qu = paginator.get_page(page)
+    context_eve = {'event_list': event_qu, 'pagenated_event_qu': pagenated_event_qu}
+
+    return render(request, template_name="community/event.html", context=context_eve)
 
 
 @login_required

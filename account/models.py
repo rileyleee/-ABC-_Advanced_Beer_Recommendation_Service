@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator
 from django.db import models
-from django.conf import settings
 
 
 def user_path(instance, filename):  # 파라미터 instance는 Photo 모델을 의미 filename은 업로드 된 파일의 파일 이름
@@ -12,12 +11,6 @@ def user_path(instance, filename):  # 파라미터 instance는 Photo 모델을 �
     extension = filename.split('.')[-1]  # 배열로 만들어 마지막 요소를 추출하여 파일확장자로 지정
     # file will be uploaded to MEDIA_ROOT/user_<id>/<random>
     return '%s/%s.%s' % (instance.user.username, pid, extension)  # 예 : wayhome/abcdefgs.png
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # User모델과 Profile을 1:1로 연결
-
 
 
 class User(AbstractUser):

@@ -8,8 +8,7 @@
         <div style="padding:15px;"></div>
         <h1>Column 리스트</h1>
         <div style="padding:15px;"></div>
-        {% for columns in column_list %}
-
+        {% for columns in pagenated_column_qu %}
             <div class="card" style="width: 80rem;">
                 <a href ="{{ columns.pk }}/">
                     <img src="{{ columns.image.url }}" class="card-img-top" alt="등록한 컬럼 이미지입니다" height="400">
@@ -25,17 +24,51 @@
             </div>
             <div style="padding:20px;">
             </div>
-
         {% endfor %}
-
         <div style="padding:20px;">
         </div>
         <a href="new/"><button class="btn btn-success" style="float: right" >새 컬럼 작성</button></a>
         <div style="padding:30px;">
         </div>
-
-        <footer class="blog-footer" style="text-align: center" >
-            <a href="/community/column" style="text-decoration-line: none;">Back to top</a>
-        </footer>
     </div>
+    <hr>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if pagenated_column_qu.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ pagenated_column_qu.previous_page_number }}">이전</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+            </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in pagenated_column_qu.paginator.page_range %}
+            {% if page_number == pagenated_column_qu.number %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if pagenated_column_qu.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ pagenated_column_qu.next_page_number }}">다음</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+            </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+    <footer class="blog-footer" style="text-align: center" >
+        <a href="/community/column" style="text-decoration-line: none;">Back to top</a>
+    </footer>
 {% endblock %}
