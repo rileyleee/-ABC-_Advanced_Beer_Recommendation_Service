@@ -1,0 +1,145 @@
+{% extends 'search/base.html' %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+
+{% block content %}
+    <style>
+
+        .vl {
+            border-right: 3px solid gray;
+            height: 230px;
+            position: absolute;
+            left: 50%;
+            margin-left: -3px;
+            top: 23%;
+        }
+
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            justify-content: space-around;
+            padding: 0 0.2em;
+            text-align: center;
+            width: 5em;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 2.3px;
+            -webkit-text-stroke-color: #2b2a29;
+            cursor: pointer;
+        }
+
+        .star-rating :checked ~ label {
+            -webkit-text-fill-color: gold;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            -webkit-text-fill-color: #fff58c;
+        }
+    </style>
+    <div class='row'>
+        <div class='col-sm-9'>
+            <h5>{{ search_details.big_kind }} >>{{ search_details.kind }}</h5>
+            <hr style="border: line 10px black;">
+            <div class="row">
+                <div class='col-sm-10'>
+                    <h2>'{{ search_details.name}}'의 맥주 정보 </h2>
+                    <br>
+                    <div class='col-sm-9'>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="background-color: ivory">맥주이름</th>
+                                <td>              </td>
+                                <td>{{ search_details.name }}</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th style="background-color: ivory">대분류 스타일</th>
+                                <td>           </td>
+                                <td>{{ search_details.big_kind }}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: ivory">소분류 스타일</th>
+                                <td>            </td>
+                                <td>{{ search_details.kind }}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: ivory">양조장 이름</th>
+                                <td>            </td>
+                                <td>{{ search_details.brewery }}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: ivory">알코올 도수</th>
+                                <td>            </td>
+                                <td>{{ search_details.abv }}%</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: ivory">판매 상태</th>
+                                <td>            </td>
+                                <td>{{ search_details.status }}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: ivory">평 점</th>
+                                <td>            </td>
+                                <td> {{ search_details.average }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <img src='/static/beerimg.png' alt="My Image" style="float: right; width:330px; height:330px; position: absolute; left: 48%; top:23%;">
+            </div>
+
+            <hr style="line: solid 10px black;">
+            <div class="card mb-2">
+                <div class="card-header bg-light">
+                    <i class="fa fa-comment fa"></i> REVIEW
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <div class="col-sm-2">
+                                <div class="star-rating space-x-4 mx-auto">
+                                    <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
+                                    <label for="5-stars" class="star pr-4">★</label>
+                                    <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
+                                    <label for="4-stars" class="star">★</label>
+                                    <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
+                                    <label for="3-stars" class="star">★</label>
+                                    <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
+                                    <label for="2-stars" class="star">★</label>
+                                    <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
+                                    <label for="1-star" class="star">★</label>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-dark mt-3" onClick="javascript:addReply();">submit</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class='col-sm-3'>
+            <div style="padding:20px;"></div>
+            <div class="card" style="width: 18rem;">
+                <img class="img-fluid" src="{% static '스텔라 광고.jpg' %}" alt="맥주 광고 이미지" width="300">
+                <div class="card-body">
+                    <p class="card-text">'650년 전통의 스텔라 아르투아' ‘스텔라’는 라틴어로 별을 의미하며, ‘아르투아’는 브루마스터였던 세바스찬 아르투아 (Sebastian Artois)의 이름에서 유래하였습니다. 병마다 새겨진 별은 스텔라 아르투아가 탄생한 크리스마스의 빛나는 순간을 나타냅니다. 스텔라 아르투아와 올 겨울 크리스마스를 함께하세요.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

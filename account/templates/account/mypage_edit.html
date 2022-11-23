@@ -1,0 +1,16 @@
+{% extends "account/base.html" %}
+{% load django_bootstrap5 %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+{% block content %}
+
+    <div class="container my-3">
+        <form method="post" action="{% url 'account:mypage_edit' %}">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-success" style="float: right">수정사항 저장</button>
+        </form>
+        <div style="padding:30px;">
+        </div>
+    </div>
+{% endblock %}

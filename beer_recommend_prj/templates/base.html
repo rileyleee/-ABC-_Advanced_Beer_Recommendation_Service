@@ -1,0 +1,57 @@
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <style type="text/css">
+        /* link - 아직 클릭하지 않은 경우 설정 */
+        a:link { color: #FF8C00; text-decoration: none;}
+        /* visited - 한번 클릭하거나 전에 클릭한 적 있을 경우 설정 */
+        a:visited { color: #191970; text-decoration: none;}
+        /* hover - 마우스를 해당 링크에 위치했을 경우 설정 */
+        a:hover { color: #00FFFF; text-decoration: none;}
+    </style>
+    <meta charset="UTF-8">
+    <title>Two_trillionaires' Beer</title>
+</head>
+<body>
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/search" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <h1 class="fs-4">오늘 시간 beer</h1>
+        </a>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/search/recommend/" class="nav-link">RECOMMENDATION</a></li>
+            <li class="nav-item"><a href="/community/column/" class="nav-link">COLUMN</a></li>
+            <li class="nav-item"><a href="/community/event/" class="nav-link">EVENT</a></li>
+
+            {% if  user.is_authenticated %}
+                <li class="nav-item"><a href="/account/logout/" class="nav-link">{{ user.username }}&nbsp&nbspLOGOUT</a></li>
+                <li class="nav-item"><a href="/account/mypage/" class="nav-link">MY PAGE</a></li>
+            {% else %}
+                <li class="nav-item"><a href="/account/signup/" class="nav-link">SIGN UP</a></li>
+                <li class="nav-item"><a href="/account/login/" class="nav-link">LOGIN</a></li>
+            {% endif %}
+        </ul>
+    </header>
+</div>
+
+<div class="container">
+
+    {% bootstrap_messages %}
+
+    {% block content %}{% endblock %}
+
+    <hr/>
+    &copy; 2022. two_trillionaires.
+
+</div>
+
+{% bootstrap_javascript %}
+
+</body>
+</html>

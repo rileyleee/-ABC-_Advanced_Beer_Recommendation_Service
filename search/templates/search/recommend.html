@@ -1,0 +1,73 @@
+{% extends 'search/base.html' %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+<style>
+    table, th, td {
+    }
+    td {
+        text-align: center;
+    }
+</style>
+{% block content %}
+    <div class="container-lg">
+        <table class="table">
+            <td height="250">
+                <h1>한 달 간의 순위를 집계해 드립니다</h1>
+                <h3>가족, 친구, 연인을 위해 시간을 beer 보는 건 어때요?</h3>
+            </td>
+        </table>
+        <div style="padding:20px;"></div>
+
+        <div class='row'>
+            <div class='col-sm-4'>
+                <table class="table">
+                    <thead>
+                    <tr><h3 style=text-align:center;>월간 인기 맥주 순</h3></tr>
+                    </thead>
+                    <tbody>
+                    {% for rev in review_ranking %}
+                        <tr height="70">
+                            <th>{{ forloop.counter }}</th>
+                            <td>           </td>
+                            <td><h6><a href = "/search/beerprofile/{{ rev.id }}">{{ rev.name }}</a></h6></td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <div class='col-sm-4'>
+                <table class="table">
+                    <thead>
+                    <tr><h3 style=text-align:center;>월간 평점 맥주 순</h3></tr>
+                    </thead>
+                    <tbody>
+                    {% for aver in average_ranking %}
+                        <tr height="70">
+                            <th>{{ forloop.counter }}</th>
+                            <td>           </td>
+                            <td><h6><a href = "/search/beerprofile/{{ aver.id }}">{{ aver.name }}</a></h6></td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <div class='col-sm-3'>
+                <h1>
+                    <div class='col-sm-3'>
+                        <div style="padding:20px;"></div>
+                        <div class="card" style="width: 25rem;" >
+                            <img class="img-fluid" src="{% static '맥주축제.jpg' %}" alt="맥주 광고 이미지" width="400" height="300">
+                            <div class="card-body">
+                                <h5 class="card-text">내일이 즐거운 대덕구에서 개최하는 먹거리, 볼거리, 놀거리 2022 대덕거리 맥주 축제에 참여하고 다양한 맥주를 경험하세요</h5>
+                            </div>
+                        </div>
+                    </div>
+                </h1>
+            </div>
+        </div>
+    </div>
+{% endblock %}

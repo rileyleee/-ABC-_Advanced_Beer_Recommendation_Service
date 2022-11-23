@@ -1,0 +1,67 @@
+{% extends 'search/base.html' %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+
+<style>
+    th, td {
+        text-align: center;
+    }
+
+
+</style>
+{% block content %}
+    <div class='row'>
+        <div class='col-sm-9'>
+            <form action="" method="get" class="form-search d-flex align-items-stretch mb-3 aos-init aos-animate">
+                <input type="text" class="form-control" name="search" placeholder={{ search }}>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            {% if not beer_list %}
+
+                <h3>검색 결과가 없습니다! 다른 키워드를 검색해 보는 건 어떠세요? </h3>
+
+            {% else %}
+                <h3>{{ search }}에 대한 검색 결과</h3>
+                <hr style="line: solid 10px black;">
+                {% for beer in beer_list %}
+                    <h4><a href="/search/beerprofile/{{ beer.id }}/">{{ beer.name }}</a></h4>
+                    <h6>맥주 스타일: {{ beer.kind }}</h6>
+                    <h6>양조장 이름: {{ beer.brewery }}</h6>
+                    <h6>제조 국가: {{ beer.country }}</h6>
+                    <hr style="line: solid 10px black;">
+                {% endfor %}
+
+            {% endif %}
+        </div>
+        <div class='col-sm-3'>
+            {% if predict_beer %}
+                <table>
+                    <h2>
+                        <b>당신에게 꼭 맞는 맥주 </b>
+                    </h2>
+                    </tr>
+                    <tr>
+                        <h3 style="color: #8B4513">
+                            <div style="padding:10px;"></div>
+                            > <b>{{ predict_beer }}</b>
+                        </h3>
+                        two_trillionaires의
+                        알고리즘으로 엄선한 <br>
+                        {{ predict_beer }} TOP 10<br>
+                        한 번 둘러 보세요!
+                    </tr>
+                    <div style="padding:10px;"></div>
+                    {% for kl in kind_list %}
+                        <tr height="70">
+                            <th>{{ forloop.counter }}</th>
+                            <td>           </td>
+                            <td><h6><a href = "/search/beerprofile/{{ kl.id }}">{{ kl.name }}</a></h6></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

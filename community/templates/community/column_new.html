@@ -1,0 +1,21 @@
+{% extends "community/base.html" %}
+{% load django_bootstrap5 %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+{% block content %}
+
+    </hr>
+    <div class="container">
+        <h2 class="my-3 border-bottom pb-2">새 칼럼 작성</h2>
+
+        <form action ="" method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div style="padding:30px;">
+            </div>
+            <button type="submit" class="btn btn-success" style="float: right">컬럼 작성</button>
+            <div style="padding:30px;">
+            </div>
+        </form>
+    </div>
+{% endblock %}

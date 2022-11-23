@@ -1,0 +1,37 @@
+{% extends "community/base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+    {% bootstrap_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+    <div class="container-lg">
+        <div style="padding:15px;"></div>
+        <h1>Event 리스트</h1>
+        <div style="padding:15px;"></div>
+
+        {% for events in event_list %}
+
+            <div class="card" style="width: 80rem;">
+                <a href="{{ events.pk }}/">
+                    <img src="{{ events.image.url }}" class="card-img-top" alt="등록한 이벤트 이미지입니다" height="400">
+                </a>
+                <div class="card-body">
+                    <div style="padding:15px;"></div>
+                    <h2 class="card-title"> {{ events.title }}</h2>
+                    <div style="padding:15px;"></div>
+                    <h4 class="card-text">{{ events.content }}</h4>
+                    <a href="{{ events.pk }}/"><button class="btn btn-success" style="float: right" >게시글 읽기</button></a>
+                </div>
+            </div>
+            <div style="padding:20px;"></div>
+        {% endfor %}
+
+        <div style="padding:20px;">
+        </div>
+
+        <footer class="blog-footer" style="text-align: center">
+            <a href="/community/event" style="text-decoration-line: none;">Back to top</a>
+        </footer>
+    </div>
+
+{% endblock %}
