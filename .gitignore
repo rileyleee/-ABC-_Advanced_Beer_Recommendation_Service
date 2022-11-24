@@ -3,5 +3,5 @@ __pycache__
 README.md
 db.sqlite3
 .idea
-final_train_beer_rating.csv
+final_proj_train_beer_ratings.csv
 final_train_beer_ratings_Ver_rader model.csv

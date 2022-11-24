@@ -85,7 +85,7 @@ WSGI_APPLICATION = "beer_recommend_prj.wsgi.application"
 DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST' : 'beerprojdb.ccrozmj7fzhu.ap-northeast-1.rds.amazonaws.com',
+        'HOST': 'beerprojdb.ccrozmj7fzhu.ap-northeast-1.rds.amazonaws.com',
         "NAME": 'beerprojdb',
         'USER': 'beer',
         'PASSWORD': 'beerbeer',

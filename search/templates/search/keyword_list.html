@@ -5,28 +5,17 @@
 <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
 
 <style>
-    th, td {
+    table, th, td {
+    }
+    td {
         text-align: center;
     }
-
-
 </style>
 {% block content %}
-
-    {% if ch_category_list %}
-        <h5>'{{ ch_category_list }}' 검색 결과입니다.</h5>
-    {% endif %}
-
-    {% if ch_country_list %}
-        <h5>'{{ ch_country_list }}' 검색 결과입니다.</h5>
-    {% endif %}
-
-
-
     <div class='row'>
         <div class='col-sm-9'>
             <form action="" method="get" class="form-search d-flex align-items-stretch mb-3 aos-init aos-animate">
-                <input type="text" class="form-control" name="search" placeholder={{ search }}>
+                <input type="text" class="form-control" name="search" placeholder={{ keyword }}>
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
             {% if not beer_list %}
@@ -34,7 +23,7 @@
                 <h3>검색 결과가 없습니다! 다른 키워드를 검색해 보는 건 어떠세요? </h3>
 
             {% else %}
-                <h3>검색 결과</h3>
+                <h3>{{ keyword }}에 대한 검색 결과</h3>
                 <hr style="line: solid 10px black;">
                 {% for beer in pagenated_beer_list %}
                     <h4><a href="/search/beerprofile/{{ beer.id }}/">{{ beer.name }}</a></h4>
@@ -43,10 +32,10 @@
                     <h6>제조 국가: {{ beer.country }}</h6>
                     <hr style="line: solid 10px black;">
                 {% endfor %}
-
             {% endif %}
         </div>
         <div class='col-sm-3'>
+
 
         </div>
     </div>
@@ -56,10 +45,10 @@
         <!-- 이전페이지 -->
         {% if pagenated_beer_list.has_previous %}
             <li class="page_item">
-                <a class="page-link" href="?page=1">처음</a>
+                <a class="page-link" href="?keyword={{ keyword }}&page=1">처음</a>
             </li>
             <li class="page-item">
-                <a class="page-link" href="?page={{ pagenated_beer_list.previous_page_number }}">이전</a>
+                <a class="page-link" href="?keyword={{ keyword }}&page={{ pagenated_beer_list.previous_page_number }}">이전</a>
             </li>
         {% else %}
             <li class="page_item">
@@ -74,11 +63,11 @@
             {% if page_start_number <= page_number and page_end_number >= page_number %}
                 {% if page_number == pagenated_beer_list.number %}
                     <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        <a class="page-link" href="?keyword={{ keyword }}&page={{ page_number }}">{{ page_number }}</a>
                     </li>
                 {% else %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        <a class="page-link" href="?keyword={{ keyword }}&page={{ page_number }}">{{ page_number }}</a>
                     </li>
                 {% endif %}
             {% endif %}
@@ -86,9 +75,9 @@
         <!-- 다음페이지 -->
         {% if pagenated_beer_list.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ pagenated_beer_list.next_page_number }}">다음</a></li>
+                <a class="page-link" href="?keyword={{ keyword }}&page={{ pagenated_beer_list.next_page_number }}">다음</a></li>
             <li class="page_item">
-                <a class="page-link" href="?page={{ last_page_num }}">마지막</a>
+                <a class="page-link" href="?keyword={{ keyword }}&page={{ last_page_num }}">마지막</a>
             </li>
         {% else %}
             <li class="page-item disabled">
@@ -100,6 +89,5 @@
         {% endif %}
     </ul>
     <!-- 페이징처리 끝 -->
-    <hr>
     <a href="{{ request.build_absolute_uri }}" style="text-decoration-line: none;">Back to top</a>
 {% endblock %}

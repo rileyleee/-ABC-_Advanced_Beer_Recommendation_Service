@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.db.models import Q
+from django.template import context
 from search.models import Beer
 from math import pi
 import matplotlib.pyplot as plt
@@ -10,29 +11,81 @@ import logging
 import pandas as pd
 from search.ml import beer_model
 
+MAX_LIST_CNT = 30
+MAX_PAGE_CNT = 5
+
 logger = logging.getLogger('tipper')
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
 
 
+def keyword(request):
+    beer_list = Beer.objects.all()
+    keyword = request.GET.get('keyword', '')
+    paginator = Paginator(beer_list, MAX_LIST_CNT)
+    page = request.GET.get('page', 1)
+    pagenated_beer_list = paginator.get_page(page)
+    last_page_num = 0
+    for last_page in paginator.page_range:
+        last_page_num = last_page_num + 1
+        # 현재 페이지가 몇번째 블럭인지
+        current_block = ((int(page) - 1) / MAX_PAGE_CNT) + 1
+        current_block = int(current_block)
+        # 페이지 시작번호
+        page_start_number = ((current_block - 1) * MAX_PAGE_CNT) + 1
+        # 페이지 끝 번호
+        page_end_number = page_start_number + MAX_PAGE_CNT - 1
+
+    if keyword:
+        beer_list = beer_list.filter(
+            Q(name__icontains=keyword) |
+            Q(brewery__icontains=keyword) |
+            Q(country__icontains=keyword)
+        )
+        template_name = "search/keyword_list.html"
+    else:
+        template_name = "search/keyword_page.html"
+
+    def get_context_data(self, **kwargs):
+        keyword = request.GET.get('keyword', '')  # 일반적으로는 q나 query이름을 씁니다.
+
+        if len(keyword) > 1:
+            context['keyword'] = keyword
+        return context
+
+    context_beer_list = {'last_page_num': last_page_num,
+                         'page_start_number': page_start_number,
+                         'page_end_number': page_end_number,
+                         'current_block': current_block,
+                         'beer_list': beer_list,
+                         'pagenated_beer_list': pagenated_beer_list,
+                         'keyword': keyword,
+                         'context': context}
+    # print(keyword)
+    return render(request, template_name, context=context_beer_list)
+
+
 # @csrf_exempt  # CSRF Token 체크를 하지 않겠습니다.
 def search(request):
-    # TODO: 2개의 뷰로 분리하는 것이 낫습니다. => 그럼 아래의 조건문이 필요가 없고, 보다 뷰가 간결해집니다.
-
     beer_list = Beer.objects.all()
-    paginator = Paginator(beer_list, '20')
+    paginator = Paginator(beer_list, MAX_LIST_CNT)
     page = request.GET.get('page', 1)
-    pagenated_beer_list = paginator.get_page((page))
-    query = request.GET.get('search', '')  # 일반적으로는 q나 query이름을 씁니다.
-    ch_category_list = request.GET.getlist("chCategory")
-    ch_country_list = request.GET.getlist("chCountry")
-    if query or ch_category_list or ch_country_list:
-        if query:
-            beer_list = beer_list.filter(
-                Q(name__icontains=query) |
-                Q(brewery__icontains=query) |
-                Q(country__icontains=query)
-            )
+    pagenated_beer_list = paginator.get_page(page)
+    ch_category_list = request.GET.getlist("chCategory", "")
+    ch_country_list = request.GET.getlist("chCountry", "")
+
+    last_page_num = 0
+    for last_page in paginator.page_range:
+        last_page_num = last_page_num + 1
+        # 현재 페이지가 몇번째 블럭인지
+        current_block = ((int(page) - 1) / MAX_PAGE_CNT) + 1
+        current_block = int(current_block)
+        # 페이지 시작번호
+        page_start_number = ((current_block - 1) * MAX_PAGE_CNT) + 1
+        # 페이지 끝 번호
+        page_end_number = page_start_number + MAX_PAGE_CNT - 1
+
+    if ch_category_list or ch_country_list:
         if ch_category_list:
             beer_list = beer_list.filter(
                 Q(big_kind__in=ch_category_list)
@@ -45,6 +98,31 @@ def search(request):
     else:
         template_name = "search/search_page.html"
 
+    def get_context_data(self, **kwargs):
+        ch_category_list = request.GET.getlist("chCategory", "")
+        ch_country_list = request.GET.getlist("chCountry", "")
+
+        if len(ch_category_list) or len(ch_country_list) > 1:
+            context['chCategory'] = ch_category_list[0]
+            context['chCountry'] = ch_country_list[0]
+
+        return context
+
+    context_beer_list = {'last_page_num': last_page_num,
+                         'page_start_number': page_start_number,
+                         'page_end_number': page_end_number,
+                         'current_block': current_block,
+                         'beer_list': beer_list,
+                         'pagenated_beer_list': pagenated_beer_list,
+                         'context': context}
+
+    print(ch_category_list)
+    print(ch_country_list)
+
+    return render(request, template_name, context=context_beer_list)
+
+
+def predict(request):
     user_feature = [
         request.GET.get('sweet'),
         request.GET.get('body'),
@@ -61,11 +139,7 @@ def search(request):
     if predict_beer:
         kind_list = kind_list.filter(
             Q(kind__icontains=predict_beer))[:10]
-
-    context_beer_list = {'beer_list': beer_list, 'pagenated_beer_list': pagenated_beer_list, 'search': query,
-                         'predict_beer': predict_beer, 'kind_list': kind_list}
-
-    return render(request, template_name, context=context_beer_list)
+    return render(request, "search/recommend.html", {'predict_beer': predict_beer, 'kind_list': kind_list})
 
 
 @login_required

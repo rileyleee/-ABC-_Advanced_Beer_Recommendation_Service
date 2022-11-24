@@ -73,11 +73,7 @@
     </div>
     <div style="padding:6px;"></div>
     <div class='box'>
-        <form action="" method="get">
-            <div class="form-search d-flex align-items-stretch mb-3 aos-init aos-animate">
-                <input type="text" class="form-control" name="search" placeholder="Name, Brewery, Style... ">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
+        <form action="" method="get" name="search">
             <div class="search_box">
                 <div class="row">
                     <div class="col">
@@ -193,114 +189,8 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col">
-                        <div class='filter-item'>
-                            <h3><span>맥주 스타일</span></h3>
-                            <h6>회원님만의 맥주 스타일 추천!</h6>
-                            <div style="padding:10px;"></div>
-                            <div class='container'>
-                                <span class="ft-16"><h6>당도</h6></span>
-                                <div class="star-rating space-x-4 mx-auto"> <!--n-특성 에서 n은 바꿔도 됨 -->
-                                    <input type="radio" id="sweet_1" name="sweet" value="1.0" v-model="sweets"/>
-                                    <label for="sweet_1" class="star pr-4">●</label>
-
-                                    <input type="radio" id="sweet_2" name="sweet" value="0.8" v-model="sweets"/>
-                                    <label for="sweet_2" class="star">●</label>
-
-                                    <input type="radio" id="sweet_3" name="sweet" value="0.6" v-model="sweets"/>
-                                    <label for="sweet_3" class="star">●</label>
-
-                                    <input type="radio" id="sweet_4" name="sweet" value="0.4" v-model="sweets"/>
-                                    <label for="sweet_4" class="star">●</label>
-
-                                    <input type="radio" id="sweet_5" name="sweet" value="0.2" v-model="sweets"/>
-                                    <label for="sweet_5" class="star">●</label>
-                                </div>
-                            </div>
-                            <div style="padding:10px;"></div>
-                            <div class='container'>
-                                <span class="ft-16"><h6>바디감</h6></span>
-                                <div class="star-rating space-x-4 mx-auto"> <!--n-특성 에서 n은 바꿔도 됨 -->
-                                    <input type="radio" id="body_1" name="body" value="1.0" v-model="bodys"/>
-                                    <label for="body_1" class="star pr-4">●</label>
-
-                                    <input type="radio" id="body_2" name="body" value="0.8" v-model="bodys"/>
-                                    <label for="body_2" class="star">●</label>
-
-                                    <input type="radio" id="body_3" name="body" value="0.6" v-model="bodys"/>
-                                    <label for="body_3" class="star">●</label>
-
-                                    <input type="radio" id="body_4" name="body" value="0.4" v-model="bodys"/>
-                                    <label for="body_4" class="star">●</label>
-
-                                    <input type="radio" id="body_5" name="body" value="0.2" v-model="bodys"/>
-                                    <label for="body_5" class="star">●</label>
-                                </div>
-                            </div>
-                            <div style="padding:10px;"></div>
-                            <div class='container'>
-                                <span class="ft-16"><h6>과일향</h6></span>
-                                <div class="star-rating space-x-4 mx-auto"> <!--n-특성 에서 n은 바꿔도 됨 -->
-                                    <input type="radio" id="fruit_1" name="fruit" value="1.0" v-model="fruits"/>
-                                    <label for="fruit_1" class="star pr-4">●</label>
-
-                                    <input type="radio" id="fruit_2" name="fruit" value="0.8" v-model="fruits"/>
-                                    <label for="fruit_2" class="star">●</label>
-
-                                    <input type="radio" id="fruit_3" name="fruit" value="0.6" v-model="fruits"/>
-                                    <label for="fruit_3" class="star">●</label>
-
-                                    <input type="radio" id="fruit_4" name="fruit" value="0.4" v-model="fruits"/>
-                                    <label for="fruit_4" class="star">●</label>
-
-                                    <input type="radio" id="fruit_5" name="fruit" value="0.2" v-model="fruits"/>
-                                    <label for="fruit_5" class="star">●</label>
-                                </div>
-                            </div>
-                            <div style="padding:10px;"></div>
-                            <div class='container'>
-                                <span class="ft-16"><h6>홉향</h6></span>
-                                <div class="star-rating space-x-4 mx-auto"> <!--n-특성 에서 n은 바꿔도 됨 -->
-                                    <input type="radio" id="hoppy_1" name="hoppy" value="1.0" v-model="hoppys"/>
-                                    <label for="hoppy_1" class="star pr-4">●</label>
-
-                                    <input type="radio" id="hoppy_2" name="hoppy" value="0.8" v-model="hoppys"/>
-                                    <label for="hoppy_2" class="star">●</label>
-
-                                    <input type="radio" id="hoppy_3" name="hoppy" value="0.6" v-model="hoppys"/>
-                                    <label for="hoppy_3" class="star">●</label>
-
-                                    <input type="radio" id="hoppy_4" name="hoppy" value="0.4" v-model="hoppys"/>
-                                    <label for="hoppy_4" class="star">●</label>
-
-                                    <input type="radio" id="hoppy_5" name="hoppy" value="0.2" v-model="hoppys"/>
-                                    <label for="hoppy_5" class="star">●</label>
-                                </div>
-                            </div>
-                            <div style="padding:10px;"></div>
-                            <div class='container'>
-                                <span class="ft-16"><h6>맥아향</h6></span>
-                                <div class="star-rating space-x-4 mx-auto"> <!--n-특성 에서 n은 바꿔도 됨 -->
-                                    <input type="radio" id="malty_1" name="malty" value="1.0" v-model="maltys"/>
-                                    <label for="malty_1" class="star pr-4">●</label>
-
-                                    <input type="radio" id="malty_2" name="malty" value="0.8" v-model="maltys"/>
-                                    <label for="malty_2" class="star">●</label>
-
-                                    <input type="radio" id="malty_3" name="malty" value="0.6" v-model="maltys"/>
-                                    <label for="malty_3" class="star">●</label>
-
-                                    <input type="radio" id="malty_4" name="malty" value="0.4" v-model="maltys"/>
-                                    <label for="malty_4" class="star">●</label>
-
-                                    <input type="radio" id="malty_5" name="malty" value="0.2" v-model="maltys"/>
-                                    <label for="malty_5" class="star">●</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                <button type="submit" class="btn btn-primary">Search</button>
             </div>
         </form>
     </div>

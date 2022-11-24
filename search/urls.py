@@ -2,10 +2,11 @@ from django.urls import path
 from search import views, ml
 
 urlpatterns = [
-     path('', views.search),
-     path('recommend/', views.recommend),
+     path('', views.keyword),
+     path('recommend/', views.predict),
      path('beerprofile/<int:pk>/', views.search_detail),
-
+     path('search/', views.search)
 ]
+
 
     

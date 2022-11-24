@@ -13,6 +13,7 @@
             <h2>{{ columns.title }}</h2></div>
         <div style="padding:10px;">
             <small style="float: right;">작성일시: {{ columns.created_at }}</small>
+        <small style="float: right;">작성자{{ columns.author }}</small>
 
             {% if columns.image %}
                 <img src="{{ columns.image.url }}" class="img-fluid" width="1250">
