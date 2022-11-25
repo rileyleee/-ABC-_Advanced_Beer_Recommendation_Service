@@ -1,8 +1,8 @@
 {% extends "community/base.html" %}
 {% load django_bootstrap5 %}
-
 {% load static %}
 <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+
 {% block content %}
     <div class="container-lg">
         <div style="padding:20px;"></div>
@@ -13,10 +13,10 @@
             <h2>{{ columns.title }}</h2></div>
         <div style="padding:10px;">
             <small style="float: right;">작성일시: {{ columns.created_at }}</small>
-        <small style="float: right;">작성자{{ columns.author }}</small>
+            <small style="float: right;">작성자{{ columns.author }}</small>
 
             {% if columns.image %}
-                <img src="{{ columns.image.url }}" class="img-fluid" width="1250">
+                <img src="{{ columns.image.url }}" class="img-fluid" width="1250" alt="작성자가 등록한 이미지입니다">
             {% endif %}
         </div>
         <div style="padding:15px;"></div>

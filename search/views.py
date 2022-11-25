@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.db.models import Q
-from django.template import context
 from search.models import Beer
 from math import pi
 import matplotlib.pyplot as plt
@@ -46,21 +45,12 @@ def keyword(request):
     else:
         template_name = "search/keyword_page.html"
 
-    def get_context_data(self, **kwargs):
-        keyword = request.GET.get('keyword', '')  # 일반적으로는 q나 query이름을 씁니다.
-
-        if len(keyword) > 1:
-            context['keyword'] = keyword
-        return context
-
     context_beer_list = {'last_page_num': last_page_num,
                          'page_start_number': page_start_number,
                          'page_end_number': page_end_number,
-                         'current_block': current_block,
                          'beer_list': beer_list,
                          'pagenated_beer_list': pagenated_beer_list,
-                         'keyword': keyword,
-                         'context': context}
+                         'keyword': keyword}
     # print(keyword)
     return render(request, template_name, context=context_beer_list)
 
@@ -71,8 +61,8 @@ def search(request):
     paginator = Paginator(beer_list, MAX_LIST_CNT)
     page = request.GET.get('page', 1)
     pagenated_beer_list = paginator.get_page(page)
-    ch_category_list = request.GET.getlist("chCategory", "")
-    ch_country_list = request.GET.getlist("chCountry", "")
+    ch_category_list = request.GET.getlist("chCategory")
+    ch_country_list = request.GET.getlist("chCountry")
 
     last_page_num = 0
     for last_page in paginator.page_range:
@@ -98,26 +88,17 @@ def search(request):
     else:
         template_name = "search/search_page.html"
 
-    def get_context_data(self, **kwargs):
-        ch_category_list = request.GET.getlist("chCategory", "")
-        ch_country_list = request.GET.getlist("chCountry", "")
-
-        if len(ch_category_list) or len(ch_country_list) > 1:
-            context['chCategory'] = ch_category_list[0]
-            context['chCountry'] = ch_country_list[0]
-
-        return context
+    if ch_category_list or ch_country_list:
+        ch_category_list = ch_category_list[0]
+        ch_country_list = ch_country_list[0]
 
     context_beer_list = {'last_page_num': last_page_num,
                          'page_start_number': page_start_number,
                          'page_end_number': page_end_number,
-                         'current_block': current_block,
+                         'ch_category_list': ch_category_list,
+                         'ch_country_list': ch_country_list,
                          'beer_list': beer_list,
-                         'pagenated_beer_list': pagenated_beer_list,
-                         'context': context}
-
-    print(ch_category_list)
-    print(ch_country_list)
+                         'pagenated_beer_list': pagenated_beer_list}
 
     return render(request, template_name, context=context_beer_list)
 

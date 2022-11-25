@@ -4,7 +4,6 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.views.generic import CreateView
-
 from account.forms import SignupForm
 
 login = LoginView.as_view(template_name="account/login.html")
@@ -18,7 +17,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # 로그인
-            return redirect('/search/')
+            return redirect('/account/login/')
     else:
         form = SignupForm()
     return render(request, 'account/signup.html', {
@@ -29,7 +28,7 @@ def signup(request):
 # 오승이네 코드
 # signup = CreateView.as_view(
 #     form_class=SignupForm,
-#     success_url="/account/login/",  # 회원가입시 login화면으로 ㄱㄱ
+#     success_url="/account/login/",
 #     template_name="account/signup.html",
 # )
 
