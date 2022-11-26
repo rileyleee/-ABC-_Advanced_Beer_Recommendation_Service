@@ -24,6 +24,7 @@ def keyword(request):
     paginator = Paginator(beer_list, MAX_LIST_CNT)
     page = request.GET.get('page', 1)
     pagenated_beer_list = paginator.get_page(page)
+
     last_page_num = 0
     for last_page in paginator.page_range:
         last_page_num = last_page_num + 1
@@ -36,7 +37,7 @@ def keyword(request):
         page_end_number = page_start_number + MAX_PAGE_CNT - 1
 
     if keyword:
-        beer_list = beer_list.filter(
+        pagenated_beer_list = beer_list.filter(
             Q(name__icontains=keyword) |
             Q(brewery__icontains=keyword) |
             Q(country__icontains=keyword)
@@ -48,7 +49,6 @@ def keyword(request):
     context_beer_list = {'last_page_num': last_page_num,
                          'page_start_number': page_start_number,
                          'page_end_number': page_end_number,
-                         'beer_list': beer_list,
                          'pagenated_beer_list': pagenated_beer_list,
                          'keyword': keyword}
     # print(keyword)
@@ -58,11 +58,11 @@ def keyword(request):
 # @csrf_exempt  # CSRF Token 체크를 하지 않겠습니다.
 def search(request):
     beer_list = Beer.objects.all()
+    ch_category_list = request.GET.getlist("chCategory")
+    ch_country_list = request.GET.getlist("chCountry")
     paginator = Paginator(beer_list, MAX_LIST_CNT)
     page = request.GET.get('page', 1)
     pagenated_beer_list = paginator.get_page(page)
-    ch_category_list = request.GET.getlist("chCategory")
-    ch_country_list = request.GET.getlist("chCountry")
 
     last_page_num = 0
     for last_page in paginator.page_range:
@@ -77,11 +77,11 @@ def search(request):
 
     if ch_category_list or ch_country_list:
         if ch_category_list:
-            beer_list = beer_list.filter(
+            pagenated_beer_list = beer_list.filter(
                 Q(big_kind__in=ch_category_list)
             )
         if ch_country_list:
-            beer_list = beer_list.filter(
+            pagenated_beer_list = beer_list.filter(
                 Q(country__in=ch_country_list)
             )
         template_name = "search/search_list.html"
@@ -89,15 +89,18 @@ def search(request):
         template_name = "search/search_page.html"
 
     if ch_category_list or ch_country_list:
-        ch_category_list = ch_category_list[0]
-        ch_country_list = ch_country_list[0]
+        if ch_category_list:
+            ch_category_list = ch_category_list[0]
+        if ch_country_list:
+            ch_country_list = ch_country_list[0]
+    else:
+        pass
 
     context_beer_list = {'last_page_num': last_page_num,
                          'page_start_number': page_start_number,
                          'page_end_number': page_end_number,
                          'ch_category_list': ch_category_list,
                          'ch_country_list': ch_country_list,
-                         'beer_list': beer_list,
                          'pagenated_beer_list': pagenated_beer_list}
 
     return render(request, template_name, context=context_beer_list)

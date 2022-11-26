@@ -13,13 +13,13 @@
 </style>
 {% block content %}
 
-    {% if ch_category_list %}
-        <h5>{{ ch_category_list }} 검색 결과입니다.</h5>
-    {% endif %}
-
-    {% if ch_country_list %}
-        <h5>{{ ch_country_list }} 검색 결과입니다.</h5>
-    {% endif %}
+{#    {% if ch_category_list %}#}
+{#        <h5>{{ ch_category_list }} 검색 결과입니다.</h5>#}
+{#    {% endif %}#}
+{##}
+{#    {% if ch_country_list %}#}
+{#        <h5>{{ ch_country_list }} 검색 결과입니다.</h5>#}
+{#    {% endif %}#}
 
     <div class='row'>
         <div class='col-sm-9'>
@@ -32,7 +32,7 @@
                 <h3>검색 결과가 없습니다! 다른 키워드를 검색해 보는 건 어떠세요? </h3>
 
             {% else %}
-                <h3>검색 결과</h3>
+                <h3>{{ ch_category_list }} and {{ ch_country_list }} 검색 결과</h3>
                 <hr style="line: solid 10px black;">
                 {% for beer in pagenated_beer_list %}
                     <h4><a href="/search/beerprofile/{{ beer.id }}/">{{ beer.name }}</a></h4>
