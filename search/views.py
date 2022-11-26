@@ -21,6 +21,18 @@ logger.addHandler(logging.StreamHandler())
 def keyword(request):
     beer_list = Beer.objects.all()
     keyword = request.GET.get('keyword', '')
+
+    if keyword:
+        beer_list = beer_list.filter(
+            Q(name__icontains=keyword) |
+            Q(brewery__icontains=keyword) |
+            Q(country__icontains=keyword)
+        )
+
+        template_name = "search/keyword_list.html"
+    else:
+        template_name = "search/keyword_page.html"
+
     paginator = Paginator(beer_list, MAX_LIST_CNT)
     page = request.GET.get('page', 1)
     pagenated_beer_list = paginator.get_page(page)
@@ -35,16 +47,6 @@ def keyword(request):
         page_start_number = ((current_block - 1) * MAX_PAGE_CNT) + 1
         # 페이지 끝 번호
         page_end_number = page_start_number + MAX_PAGE_CNT - 1
-
-    if keyword:
-        pagenated_beer_list = beer_list.filter(
-            Q(name__icontains=keyword) |
-            Q(brewery__icontains=keyword) |
-            Q(country__icontains=keyword)
-        )
-        template_name = "search/keyword_list.html"
-    else:
-        template_name = "search/keyword_page.html"
 
     context_beer_list = {'last_page_num': last_page_num,
                          'page_start_number': page_start_number,
@@ -60,6 +62,20 @@ def search(request):
     beer_list = Beer.objects.all()
     ch_category_list = request.GET.getlist("chCategory")
     ch_country_list = request.GET.getlist("chCountry")
+
+    if ch_category_list or ch_country_list:
+        if ch_category_list:
+            beer_list = beer_list.filter(
+                Q(big_kind__in=ch_category_list)
+            )
+        if ch_country_list:
+            beer_list = beer_list.filter(
+                Q(country__in=ch_country_list)
+            )
+        template_name = "search/search_list.html"
+    else:
+        template_name = "search/search_page.html"
+
     paginator = Paginator(beer_list, MAX_LIST_CNT)
     page = request.GET.get('page', 1)
     pagenated_beer_list = paginator.get_page(page)
@@ -74,19 +90,6 @@ def search(request):
         page_start_number = ((current_block - 1) * MAX_PAGE_CNT) + 1
         # 페이지 끝 번호
         page_end_number = page_start_number + MAX_PAGE_CNT - 1
-
-    if ch_category_list or ch_country_list:
-        if ch_category_list:
-            pagenated_beer_list = beer_list.filter(
-                Q(big_kind__in=ch_category_list)
-            )
-        if ch_country_list:
-            pagenated_beer_list = beer_list.filter(
-                Q(country__in=ch_country_list)
-            )
-        template_name = "search/search_list.html"
-    else:
-        template_name = "search/search_page.html"
 
     if ch_category_list or ch_country_list:
         if ch_category_list:
