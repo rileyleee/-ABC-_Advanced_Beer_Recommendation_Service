@@ -31,7 +31,9 @@ def column_new(request):
     else:
         form = ColumnForm(request.POST, request.FILES)
         if form.is_valid():  # 폼이 유효하다면
-            column = form.save()
+            column = form.save(commit=False)
+            column.author = request.user
+            column.save()
             return redirect(f"/community/column/{column.pk}/")
 
     return render(request, "community/column_new.html", {

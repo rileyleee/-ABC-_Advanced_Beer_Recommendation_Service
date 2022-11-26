@@ -12,15 +12,17 @@
         <div class="container-fluid">
             <h2>{{ events.title }}</h2></div>
         <div style="padding:10px;"></div>
-        <small style="float: right;">작성일시: {{ events.created_at }}</small>
+        <small style="float: right;">작성자: 관리자 </small>
         {# image 필드에 저장된 파일이 있다면 #}
         {% if events.image %}
-            <img src="{{ events.image.url }}" class="img-fluid" width="1270">
+            <img src="{{ events.image.url }}" class="img-fluid" width="1270" alt="관리자가 등록한 이미지입니다">
         {% endif %}
+        <small style="float: right;">작성일시: {{ events.created_at }}</small>
+        <hr>
+        <div style="padding:15px;"></div>
+        <div class="container-fluid">
+            <p>{{ events.content }}</p></div>
+        <div style="padding:10px;"></div>
     </div>
-    <div style="padding:15px;"></div>
-    <div class="container-fluid">
-        <p>{{ events.content }}</p></div>
-    <div style="padding:10px;"></div>
-    </hr>
+
 {% endblock %}
