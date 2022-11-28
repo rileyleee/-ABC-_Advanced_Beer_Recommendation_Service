@@ -26,7 +26,7 @@ from beer_recommend_prj import settings
 
 def root(request):
     return redirect("/search/")
-    # HttpResponse("/search를 추가해 '오늘 시간 비어: 맥주 추천 페이지'로 이동해주세요")
+    # HttpResponse("/two_trillion를 추가해 '오늘 시간 비어: 맥주 추천 페이지'로 이동해주세요")
 
 
 urlpatterns = [

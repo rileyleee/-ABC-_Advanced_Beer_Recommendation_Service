@@ -54,7 +54,7 @@
             <div class="row">
                 <div class='col-sm-10'>
                     <h2>'{{ search_details.name}}'의 맥주 정보 </h2>
-                    <br> {{ search_details.id }}
+                    <br>
                     <div>나의 맥주 등록 수: {{ search_details.like_count }}</div>
                     <a href="{% url "search:like" search_details.id %}">
                         {% if user in search_details.like_users.all %}
@@ -63,8 +63,6 @@
                             나의 맥주 담기
                         {% endif %}
                     </a>
-
-
                     <div class='col-sm-9'>
                         <table class="table">
                             <thead>
@@ -139,16 +137,17 @@
                     </ul>
                 </div>
             </div>
-
         </div>
         <div class='col-sm-3'>
-            <div style="padding:20px;"></div>
-            <div class="card" style="width: 18rem;">
-                <img class="img-fluid" src="{% static '스텔라 광고.jpg' %}" alt="맥주 광고 이미지" width="300">
-                <div class="card-body">
-                    <p class="card-text">'650년 전통의 스텔라 아르투아' ‘스텔라’는 라틴어로 별을 의미하며, ‘아르투아’는 브루마스터였던 세바스찬 아르투아 (Sebastian Artois)의 이름에서 유래하였습니다. 병마다 새겨진 별은 스텔라 아르투아가 탄생한 크리스마스의 빛나는 순간을 나타냅니다. 스텔라 아르투아와 올 겨울 크리스마스를 함께하세요.</p>
-                </div>
-            </div>
+            <table>
+                {% for na in name_list %}
+                    <tr height="70">
+                        <th>{{ forloop.counter }}</th>
+                        <td>           </td>
+                        <td><h6><a href = "/search/beerprofile/{{ na.id }}">{{ na.name }} ( {{ na.country }} )</a></h6></td>
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
 {% endblock %}

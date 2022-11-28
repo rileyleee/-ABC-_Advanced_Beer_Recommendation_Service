@@ -8,6 +8,7 @@ urlpatterns = [
      path('recommend/', views.predict),
      path('beerprofile/<int:pk>/', views.search_detail, name="beerprofile"),
      path('search/', views.search),
+     path('ranking/', views.ranking),
      path('like/<int:pk>/', views.like, name="like"),
 ]
 

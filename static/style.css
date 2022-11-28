@@ -15,7 +15,7 @@ p{
 
 
 body {
-  background-color: #FFFACD;
+  background-color: #FED049;
   font-family: 'Gowun Dodum', sans-serif;
   font-size: 18px;
   font-weight: 500;
@@ -24,7 +24,7 @@ body {
 
 th {
   color: #8B4513;
-  background: ivory;
+  background: #E8D08F;
   border-bottom:1px solid #8B5927;
   border-right: 1px solid #FFFACD;
   font-size:20px;
@@ -54,3 +54,6 @@ td {
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #FFFACD;
 }
+
+body, html {cursor: url(cursor2.cur), auto}
+a {cursor: url(cursor2.cur), auto}

@@ -30,7 +30,7 @@ def signup(request):
 #     success_url="/account/login/",
 #     template_name="account/signup.html",
 # )
-
+@login_required
 def mypage_edit(request):
     user = request.user
     if request.method == "POST":
@@ -57,6 +57,7 @@ def mypage(request):
                   {'person': user})
 
 
+@login_required
 def mybeer(request):
     user = request.user
     mybeers = user.like_beers.all()

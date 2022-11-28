@@ -2,7 +2,7 @@
 {% load django_bootstrap5 %}
 {% bootstrap_css %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'style.css?after' %}" type="text/css">
 
 {% block title %}Home{% endblock %}
 {% block content %}
@@ -13,14 +13,14 @@
             margin: 40px auto;
         }
 
+        }
     </style>
-    <div style="padding:130px;"></div>
-    <div style="padding:6px;"></div>
+    <img src="https://media1.giphy.com/media/xuPJrZiruRQ1KRr9Ea/giphy.gif" class="img-fluid" alt="..." style="margin-left: auto; margin-right: auto; display: block;"/>
     <div class='box'>
         <form action="" method="get">
             <div class="form-search d-flex align-items-stretch mb-3 aos-init aos-animate">
-                <input type="text" class="form-control" name="keyword" placeholder="Name, Brewery, Country... ">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <input type="text" class="form-control" name="keyword" placeholder="Name, Brewery, Style... ">
+                <button type="summit" class="btn text-white" style="background-color: #68B984"><b>search</b></button>
             </div>
         </form>
     </div>

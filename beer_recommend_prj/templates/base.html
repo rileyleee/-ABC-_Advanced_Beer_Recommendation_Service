@@ -39,45 +39,63 @@
             bottom: 0;
             left: 0;
         }
+
+
+
     </style>
     <meta charset="UTF-8">
     <title>Two_trillionaires' Beer</title>
 </head>
 <body>
-<div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/search" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <h1 class="fs-4">오늘 시간 beer</h1>
-        </a>
+<nav style="background-color: #3D5656">
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" >
+            <a href="/search" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <h1 class="fs-4" style="color: white">오늘 시간 beer?</h1>
+            </a>
 
-        <ul class="nav nav-pills">
-            <li class="nav-item"><h5><a href="/search/recommend/" class="nav-link">RECOMMENDATION</a></h5></li>
-            <div style="padding:4px;"></div>
-            <div class="dropdown">
+            <ul class="nav nav-pills">
+                <li class="nav-item" ><h5><b><a href="/search/ranking/" class="nav-link" style="color: white">RANKING</a></b></h5></li>
+                <li class="nav-item"><h5><b><a href="/search/recommend/" class="nav-link" style="color: white">RECOMMENDATION</a></b></h5></li>
                 <div style="padding:4px;"></div>
-                <button class="navbar-toggler" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <h5>COMMUNITY</h5>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <li class="nav-item"><h6><a href="/search/recommend/" class="nav-link">RECOMMENDATION</a></h6></li>
-                    <li class="nav-item"><h6><a href="/community/column/" class="nav-link">COLUMN</a></h6></li>
-                    <li class="nav-item"><h6><a href="/community/event/" class="nav-link">EVENT</a></h6></li>
+                <div class="dropdown">
+                    <div style="padding:4px;"></div>
+                    <button class="navbar-toggler" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <h5 style="color: white"><b>SEARCH</b></h5>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                        <li class="nav-item"><h6><a href="/search" class="nav-link">KEYWORD</a></h6></li>
+                        <li class="nav-item"><h6><a href="/search/search" class="nav-link">SEARCH</a></h6></li>
 
-                </ul>
-            </div>
-            <div style="padding:4px;"></div>
+                    </ul>
+                </div>
+                <div style="padding:4px;"></div>
+                <div class="dropdown">
+                    <div style="padding:4px;"></div>
+                    <button class="navbar-toggler" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <h5 style="color: white"><b>ㅤCOMMUNITY</b></h5>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                        <li class="nav-item"><h6><a href="/search/recommend/" class="nav-link">RECOMMENDATION</a></h6></li>
+                        {#                    영후가 자유 게시판 만들면 a태그 수정#}
+                        <li class="nav-item"><h6><a href="/community/column/" class="nav-link">COLUMN</a></h6></li>
+                        <li class="nav-item"><h6><a href="/community/event/" class="nav-link">EVENT</a></h6></li>
 
-            {% if  user.is_authenticated %}
-                <li class="nav-item"><a href="/account/logout/" class="nav-link">{{ user.username }}&nbsp&nbspLOGOUT</a></li>
-                <li class="nav-item"><a href="/account/mypage/" class="nav-link">MY PAGE</a></li>
-            {% else %}
-                <li class="nav-item"><a href="/account/signup/" class="nav-link"><h5>SIGN UP</h5></a></li>
-                <li class="nav-item"><a href="/account/login/" class="nav-link"><h5>LOGIN</h5></a></li>
-            {% endif %}
-        </ul>
-    </header>
-</div>
+                    </ul>
+                </div>
+                <div style="padding:4px;"></div>
 
+                {% if  user.is_authenticated %}
+                    <li class="nav-item"><h5><a href="/account/logout/" class="nav-link" style="color: white"><b>{{ user.username }}&nbsp&nbspLOGOUT</b></a></h5></li>
+                    <li class="nav-item"><h5><a href="/account/mypage/" class="nav-link" style="color: white"><b>MY PAGE</b></a></h5></li>
+                {% else %}
+                    <li class="nav-item"><a href="/account/signup/" class="nav-link" style="color: white"><h5><b>SIGN UP</b></h5></a></li>
+                    <li class="nav-item"><a href="/account/login/" class="nav-link" style="color: white"><h5><b>LOGIN</b></h5></a></li>
+                {% endif %}
+            </ul>
+        </header>
+    </div>
+</nav>
 <div class="container">
 
     {% bootstrap_messages %}
