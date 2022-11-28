@@ -337,3 +337,4 @@ def like(request, pk):
         beer.save()
 
     return redirect('search:beerprofile', pk)
+
