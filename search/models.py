@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Beer(models.Model):
     id = models.AutoField(primary_key=True)
     big_kind = models.CharField(max_length=100)
@@ -17,3 +18,8 @@ class Beer(models.Model):
     fruity = models.FloatField()
     hoppy = models.FloatField()
     malty = models.FloatField()
+    like_users = models.ManyToManyField('account.User', related_name='like_beers', blank=True)
+    like_count = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.name

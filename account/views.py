@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
-from django.views.generic import CreateView
 from account.forms import SignupForm
 
 login = LoginView.as_view(template_name="account/login.html")
@@ -56,3 +55,10 @@ def mypage(request):
     user = request.user
     return render(request, 'account/mypage.html',
                   {'person': user})
+
+
+def mybeer(request):
+    user = request.user
+    mybeers = user.like_beers.all()
+    return render(request, 'account/mybeerlist.html',
+                  {'person': user, 'mybeers': mybeers})

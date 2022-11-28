@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
 
 {% block content %}
+    <h2>혜연이 의견: 왼쪽에 테이블 만들어서 메뉴처럼 보이게 하고 나의 맥주 링크 담기</h2>
     <div class="container-lg" style = "padding: 10px;" >
         <h1 class="wrap-tit" >프로필 페이지</h1>
         <div style="padding:20px;"></div>
@@ -28,7 +29,7 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <th style="background-color: ivory">최애맥주</th>
+                            <th style="background-color: ivory" >Best Beer</th>
                             <td>{{ person.bestbeer }}</td>
                         </tr>
                         <tr>
@@ -46,6 +47,10 @@
                         <tr>
                             <th style="background-color: ivory">나이</th>
                             <td>{{ person.age }}</td>
+                        </tr>
+                        <tr>
+                            <th style="background-color: ivory">나의 맥주</th>
+                            <td> <a href="/account/mybeerlist">'나의 맥주'로 이동</a></td>
                         </tr>
                         </tbody>
                     </table>

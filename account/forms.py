@@ -16,11 +16,12 @@ class SignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = UserCreationForm.Meta.fields + (
-            "bestbeer",
             "email",
             "gender",
             "age",
+            "bestbeer",
             "image",
+
         )
         pass
 

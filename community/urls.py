@@ -1,6 +1,7 @@
 from django.urls import path
 from community import views
 
+app_name = 'community'
 urlpatterns = [
     path('column/', views.columns),
     path('column/new/', views.column_new),

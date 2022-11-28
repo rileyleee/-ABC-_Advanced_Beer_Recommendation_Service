@@ -1,7 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator
-from beer_recommend_prj.settings import MEDIA_ROOT
 from django.db import models
+from beer_recommend_prj.settings import MEDIA_ROOT
+from search.models import Beer
 
 
 # def user_path(instance, filename):  # 파라미터 instance는 Photo 모델을 의미 filename은 업로드 된 파일의 파일 이름
@@ -34,8 +35,9 @@ class User(AbstractUser):
         ],
         null=True,
     )
-    bestbeer = models.CharField(max_length=40, blank=True)
 
     email = models.EmailField(max_length=40, blank=True)
 
-    image = models.ImageField(upload_to='%Y/%m/%d/', blank=True, null=True)
+    bestbeer = models.CharField(max_length=40, blank=True)
+
+    image = models.ImageField(upload_to=MEDIA_ROOT, blank=True, null=True)

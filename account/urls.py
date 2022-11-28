@@ -11,6 +11,7 @@ urlpatterns = [
     path("signup/", views.signup, name='signup'),
     path("mypage/", views.mypage, name='mypage'),
     path("mypage_edit/", views.mypage_edit, name='mypage_edit'),
+    path("mybeerlist/", views.mybeer, name='mybeerlist')
 ]
 
 urlpatterns += \

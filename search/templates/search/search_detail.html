@@ -49,13 +49,22 @@
     </style>
     <div class='row'>
         <div class='col-sm-9'>
-            <h5>{{ search_details.big_kind }} >>{{ search_details.kind }}</h5>
+            <h5>스타일 대분류 {{ search_details.big_kind }} >> 스타일 소분류 {{ search_details.kind }}</h5>
             <hr style="border: line 10px black;">
             <div class="row">
                 <div class='col-sm-10'>
                     <h2>'{{ search_details.name}}'의 맥주 정보 </h2>
+                    <br> {{ search_details.id }}
+                    <div>나의 맥주 등록 수: {{ search_details.like_count }}</div>
+                    <a href="{% url "search:like" search_details.id %}">
+                        {% if user in search_details.like_users.all %}
+                            나의 맥주 담기 취소
+                        {% else %}
+                            나의 맥주 담기
+                        {% endif %}
+                    </a>
 
-                    <br>
+
                     <div class='col-sm-9'>
                         <table class="table">
                             <thead>
@@ -102,7 +111,6 @@
                 </div>
                 <img src='/static/beerimg.png' alt="My Image" style="float: right; width:330px; height:330px; position: absolute; left: 48%; top:23%;">
             </div>
-
             <hr style="line: solid 10px black;">
             <div class="card mb-2">
                 <div class="card-header bg-light">

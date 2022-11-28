@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from search.models import Beer
 from math import pi
@@ -129,7 +129,6 @@ def predict(request):
     return render(request, "search/recommend.html", {'predict_beer': predict_beer, 'kind_list': kind_list})
 
 
-@login_required
 def search_detail(request, pk):
     search_detail = Beer.objects.get(id=pk)
 
@@ -185,3 +184,19 @@ def recommend(request):
         'search/recommend.html',
         {'review_ranking': review_ranking, 'average_ranking': average_ranking}
     )
+
+
+@login_required  # 좋아요 구현
+def like(request, pk):
+    beer = get_object_or_404(Beer, id=pk)
+
+    if request.user in beer.like_users.all():
+        beer.like_users.remove(request.user)
+        beer.like_count -= 1
+        beer.save()
+    else:
+        beer.like_users.add(request.user)
+        beer.like_count += 1
+        beer.save()
+
+    return redirect('search:beerprofile', pk)
