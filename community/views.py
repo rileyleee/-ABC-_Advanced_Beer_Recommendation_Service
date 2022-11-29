@@ -92,7 +92,3 @@ def event_new(request):
                   {
                       "form": form
                   })
-
-
-def summer_note(request):
-    return render(request, "community/board_new.html")

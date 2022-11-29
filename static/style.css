@@ -15,7 +15,7 @@ p{
 
 
 body {
-  background-color: #FED049;
+  background-color: white;
   font-family: 'Gowun Dodum', sans-serif;
   font-size: 18px;
   font-weight: 500;
@@ -55,5 +55,9 @@ td {
   border-right: 1px solid #FFFACD;
 }
 
-body, html {cursor: url(cursor2.cur), auto}
+body, html {cursor: url(cursor2.cur), auto;}
 a {cursor: url(cursor2.cur), auto}
+html, body {
+  margin: 0;
+  padding: 0;
+}

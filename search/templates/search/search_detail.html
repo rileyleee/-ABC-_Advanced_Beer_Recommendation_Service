@@ -6,14 +6,11 @@
 
 {% block content %}
     <style>
-
-        .vl {
-            border-right: 3px solid gray;
-            height: 230px;
-            position: absolute;
-            left: 50%;
-            margin-left: -3px;
-            top: 23%;
+        .card-header{
+            background-color: #FED049;
+        }
+        h2{ font-weight: 400;
+            font-family: 'Ubuntu', sans-serif;
         }
 
         .star-rating {
@@ -46,78 +43,91 @@
         .star-rating label:hover ~ label {
             -webkit-text-fill-color: #fff58c;
         }
+        .box {
+            margin-bottom : 20px;
+            padding-top : 20px;
+            padding-right : 5px;
+            padding-bottom: 30px;
+            padding-left: 30px;
+            border : 1px solid #fd9400;
+            border-radius : 5px;
+        }
+        hr {
+            height: 1px;
+            background-color: black;
+        }
     </style>
     <div class='row'>
+        <div style="padding:20px;"></div>
         <div class='col-sm-9'>
             <h5>스타일 대분류 {{ search_details.big_kind }} >> 스타일 소분류 {{ search_details.kind }}</h5>
-            <hr style="border: line 10px black;">
+            <hr style="border: line 15px black;">
             <div class="row">
-                <div class='col-sm-10'>
-                    <h2>'{{ search_details.name}}'의 맥주 정보 </h2>
-                    <br>
-                    <div>나의 맥주 등록 수: {{ search_details.like_count }}</div>
-                    <a href="{% url "search:like" search_details.id %}">
-                        {% if user in search_details.like_users.all %}
-                            나의 맥주 담기 취소
-                        {% else %}
-                            나의 맥주 담기
-                        {% endif %}
-                    </a>
-                    <div class='col-sm-9'>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th style="background-color: ivory">맥주이름</th>
-                                <td>              </td>
-                                <td>{{ search_details.name }}</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th style="background-color: ivory">대분류 스타일</th>
-                                <td>           </td>
-                                <td>{{ search_details.big_kind }}</td>
-                            </tr>
-                            <tr>
-                                <th style="background-color: ivory">소분류 스타일</th>
-                                <td>            </td>
-                                <td>{{ search_details.kind }}</td>
-                            </tr>
-                            <tr>
-                                <th style="background-color: ivory">양조장 이름</th>
-                                <td>            </td>
-                                <td>{{ search_details.brewery }}</td>
-                            </tr>
-                            <tr>
-                                <th style="background-color: ivory">알코올 도수</th>
-                                <td>            </td>
-                                <td>{{ search_details.abv }}%</td>
-                            </tr>
-                            <tr>
-                                <th style="background-color: ivory">판매 상태</th>
-                                <td>            </td>
-                                <td>{{ search_details.status }}</td>
-                            </tr>
-                            <tr>
-                                <th style="background-color: ivory">평 점</th>
-                                <td>            </td>
-                                <td> {{ search_details.average }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                <div class="box">
+                    <div class='col-sm-10'>
+                        <div style="padding:15px;"></div>
+                        <a href="{% url "search:like" search_details.id %}">
+                            {% if user in search_details.like_users.all %}
+                                <i class="fa-solid fa-beer-mug-empty"> Not My Beer </i>
+                            {% else %}
+                                <i class="fa-solid fa-beer-mug-empty"> To My Beer </i>
+                            {% endif %}
+                        </a>
+                        <h2> {{ search_details.name}} </h2>
+                        <div style="padding:5px;"></div>
+
+                        <div class='col-sm-9'>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="background-color: ivory">맥주이름</th>
+                                    <td>{{ search_details.name }}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th style="background-color: ivory">대분류 스타일</th>
+                                    <td>{{ search_details.big_kind }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: ivory">소분류 스타일</th>
+                                    <td>{{ search_details.kind }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: ivory">양조장 이름</th>
+                                    <td>{{ search_details.brewery }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: ivory">알코올 도수</th>
+                                    <td>{{ search_details.abv }}%</td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: ivory">판매 상태</th>
+                                    <td>{{ search_details.status }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: ivory">평 점</th>
+                                    <td> {{ search_details.average }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <h5> MY BEER 등록한 투트: {{ search_details.like_count }}</h5>
+                        </div>
                     </div>
+                    <img class=img-fluid src='/static/beerimg.png' alt="My Image" style="float: right; width:380px; height:380px; position: absolute; left: 47.25%; top:20%;">
                 </div>
-                <img src='/static/beerimg.png' alt="My Image" style="float: right; width:330px; height:330px; position: absolute; left: 48%; top:23%;">
             </div>
+            <div style="padding:5px;"></div>
             <hr style="line: solid 10px black;">
+            <div style="padding:20px;"></div>
             <div class="card mb-2">
-                <div class="card-header bg-light">
-                    <i class="fa fa-comment fa"></i> REVIEW
+                <div class="card-header">
+                    <i class="fa fa-comment fa"></i> 맥주 리뷰
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
                             <div class="col-sm-2">
                                 <div class="star-rating space-x-4 mx-auto">
                                     <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
@@ -132,22 +142,26 @@
                                     <label for="1-star" class="star">★</label>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-dark mt-3" onClick="javascript:addReply();">submit</button>
+                            <button type="button" class="btn btn-warning" style="float: right" onClick="javascript:addReply();">리뷰 작성</button>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+
         <div class='col-sm-3'>
-            <table>
-                {% for na in name_list %}
-                    <tr height="70">
-                        <th>{{ forloop.counter }}</th>
-                        <td>           </td>
-                        <td><h6><a href = "/search/beerprofile/{{ na.id }}">{{ na.name }} ( {{ na.country }} )</a></h6></td>
-                    </tr>
-                {% endfor %}
-            </table>
+            <div class="box" style="border-color: white">
+                <h3>지금 보고있는 맥주가 취향저격이라면!</h3>
+                <div style="padding:10px;"></div>
+                <table>
+                    {% for na in name_list %}
+                        <tr height="90">
+                            <th style="background-color: #FED049; color: white" >{{ forloop.counter }}</th>
+                            <td><h6><a href = "/search/beerprofile/{{ na.id }}">{{ na.name }} ( {{ na.country }} )</a></h6></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}

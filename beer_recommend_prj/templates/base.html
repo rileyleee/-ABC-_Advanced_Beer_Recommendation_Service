@@ -6,11 +6,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <script src="https://kit.fontawesome.com/72aa8eed9c.js" crossorigin="anonymous"></script>
     <style type="text/css">
         /* link - 아직 클릭하지 않은 경우 설정 */
         a:link { color: #FF8C00; text-decoration: none;}
         /* visited - 한번 클릭하거나 전에 클릭한 적 있을 경우 설정 */
-        a:visited { color: #191970; text-decoration: none;}
+        a:visited { text-decoration: none;}
         /* hover - 마우스를 해당 링크에 위치했을 경우 설정 */
         a:hover { color: #00FFFF; text-decoration: none;}
         .dropdown li ul {display:none;}
@@ -38,20 +39,16 @@
             position: absolute;
             bottom: 0;
             left: 0;
-        }
-
-
-
-    </style>
+        }</style>
     <meta charset="UTF-8">
     <title>Two_trillionaires' Beer</title>
 </head>
 <body>
-<nav style="background-color: #3D5656">
+<nav style="background-color: #FED049">
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" >
             <a href="/search" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <h1 class="fs-4" style="color: white">오늘 시간 beer?</h1>
+                <h1 class="fs-4" style="color: black">오늘 시간 beer?</h1>
             </a>
 
             <ul class="nav nav-pills">
@@ -76,7 +73,7 @@
                         <h5 style="color: white"><b>ㅤCOMMUNITY</b></h5>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                        <li class="nav-item"><h6><a href="/community/board/new/" class="nav-link">BOARD</a></h6></li>
+                        <li class="nav-item"><h6><a href="/community/board" class="nav-link">BOARD</a></h6></li>
                         {#                    영후가 자유 게시판 만들면 a태그 수정#}
                         <li class="nav-item"><h6><a href="/community/column/" class="nav-link">COLUMN</a></h6></li>
                         <li class="nav-item"><h6><a href="/community/event/" class="nav-link">EVENT</a></h6></li>

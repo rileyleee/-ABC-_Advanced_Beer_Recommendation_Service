@@ -163,7 +163,7 @@ def predict(request):
         df_ab = df_ac.reset_index()
 
         a = df_ab['스타일소분류'].str.contains('recommand')
-        #해당 지역의 인덱스 찾기
+        # 해당 지역의 인덱스 찾기
         df2 = df_ab[a]
         print(df2.iloc[0])
         df2 = df2.drop(['index'], axis=1)
@@ -197,18 +197,31 @@ def predict(request):
 
     else:
         prename_list = ''
-    return render(request, "search/recommend.html", {'predict_beer': predict_beer, 'kind_list': kind_list, 'prename_list':prename_list})
+    return render(request, "search/recommend.html",
+                  {'predict_beer': predict_beer, 'kind_list': kind_list, 'prename_list': prename_list})
 
 
+@login_required
 def search_detail(request, pk):
+    name_list = ''
+
     search_detail = Beer.objects.get(id=pk)
 
-    df = pd.read_csv('final_train_beer_ratings_Ver_rader model1.csv', encoding='utf-8', index_col=0)
+    import matplotlib
+    import matplotlib.font_manager as fm
+
+    fm.get_fontconfig_fonts()
+    font_location = 'C:\Windows\Fonts\malgun.ttf'  # For Windows
+    font_name = fm.FontProperties(fname=font_location).get_name()
+    matplotlib.rc('font', family=font_name)
+
+    df = pd.read_csv('final_train_beer_ratings_Ver_rader model1.csv', encoding='utf-8-sig', index_col=0)
     aaa = df['Full Name'].iloc[pk]
     cc = df[df['Full Name'] == '%s' % aaa]
 
     cc = cc[
         ['Body', 'Sweet', 'Fruity', 'Hoppy', 'Malty']]
+    cc = cc.rename(columns={'Body': '바디감', 'Sweet': '당도', 'Fruity': '과일향', 'Hoppy': '홉향', 'Malty': '맥아향'})
     dfR = cc
     n = 0
     angles = [x / 5 * (2 * pi) for x in range(5)]  # 각 등분점
@@ -226,8 +239,8 @@ def search_detail(request, pk):
     ax.set_theta_offset(pi / 2)  # 시작점
     ax.set_theta_direction(-1)  # 그려지는 방향 시계방향
 
-    plt.xticks(angles[:-1], labels, fontsize=13)  # x축 눈금 라벨
-    ax.tick_params(axis='x', which='major', pad=15)  # x축과 눈금 사이에 여백을 준다.
+    plt.xticks(angles[:-1], labels, fontsize=27)  # x축 눈금 라벨
+    ax.tick_params(axis='x', which='major', pad=30)  # x축과 눈금 사이에 여백을 준다.
 
     ax.set_rlabel_position(0)  # y축 각도 설정(degree 단위)
     plt.yticks([-1, 0, 1, 3, 5], ['', '', '', '', ''], fontsize=10)  # y축 눈금 설정
@@ -236,7 +249,7 @@ def search_detail(request, pk):
     ax.plot(angles, data, color=color, linewidth=2, linestyle='solid')  # 레이더 차트 출력
     ax.fill(angles, data, color=color, alpha=0.4)  # 도형 안쪽에 색을 채워준다.
 
-    plt.title('', size=13, color=color, x=0.5, y=1, ha='center')  # 타이틀은 캐릭터 클래스로 한다.
+    plt.title('', size=20, color=color, x=0.5, y=1, ha='center')  # 타이틀은 캐릭터 클래스로 한다.
 
     plt.tight_layout(pad=5)  # subplot간 패딩 조절
 
@@ -251,7 +264,7 @@ def search_detail(request, pk):
 
     gf = df[df['스타일소분류'] == search_detail.kind]
 
-    my_favor = pd.DataFrame(columns=['맥주명','Body', 'Sweet', 'Fruity', 'Hoppy', 'Malty'])
+    my_favor = pd.DataFrame(columns=['맥주명', 'Body', 'Sweet', 'Fruity', 'Hoppy', 'Malty'])
     f0 = search_detail.name
     f1 = search_detail.body  # value 넣기
     f2 = search_detail.sweet
@@ -297,7 +310,7 @@ def search_detail(request, pk):
         else:
             final = ''
 
-    ffinal = final.iloc[0:6]
+    ffinal = final.iloc[0:11]
 
     fffinal = ffinal['맥주명'].to_list()
     print(fffinal)
@@ -305,7 +318,7 @@ def search_detail(request, pk):
     # ---------------------
     if fffinal:
         name_list = name_list.filter(
-            Q(name__in=fffinal))[:5]
+            Q(name__in=fffinal))[:10]
 
     return render(request, "search/search_detail.html", {
         "search_details": search_detail, "name_list": name_list
@@ -337,4 +350,3 @@ def like(request, pk):
         beer.save()
 
     return redirect('search:beerprofile', pk)
-
