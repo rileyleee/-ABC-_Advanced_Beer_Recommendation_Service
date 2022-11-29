@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "account",
     "search",
-    "single_page",
     "community",
 ]
 

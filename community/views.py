@@ -80,7 +80,6 @@ def event_detail(request, pk):
                   })
 
 
-@login_required
 def event_new(request):
     if request.method == 'GET':
         form = EventForm()
