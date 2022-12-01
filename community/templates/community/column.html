@@ -3,6 +3,7 @@
 {% block content %}
     {% bootstrap_css %}
     {% load static %}
+
     <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
     <div class="container-lg">
         <div style="padding:15px;"></div>
@@ -14,7 +15,8 @@
                 <tr>
                     <th scope="col" style="width: 100px">컬럼번호</th>
                     <th scope="col">컬럼 썸네일</th>
-                    <th scope="col" style="width: 650px">컬럼제목</th>
+                    <th scope="col" style="width: 550px">컬럼제목</th>
+                    <th scope="col" style="width: 150px">작성자</th>
                     <th scope="col" style="width: 300px">게시일자</th>
                 </tr>
                 </thead>
@@ -28,6 +30,7 @@
                             </a>
                         </td>
                         <td><a href="{{ columns.pk }}/">{{ columns.title }}</a></td>
+                        <td><a href="{{ columns.pk }}/">{{ columns.author }}</a></td>
                         <td><a href="{{ columns.pk }}/">{{ columns.created_at }}</a></td>
                     </tr>
                 {% endfor %}
@@ -77,7 +80,4 @@
         {% endif %}
     </ul>
     <!-- 페이징처리 끝 -->
-    <footer class="blog-footer" style="text-align: center" >
-        <a href="/community/column" style="text-decoration-line: none;">Back to top</a>
-    </footer>
 {% endblock %}

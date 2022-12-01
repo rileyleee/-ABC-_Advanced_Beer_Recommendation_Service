@@ -310,7 +310,7 @@ def search_detail(request, pk):
         else:
             final = ''
 
-    ffinal = final.iloc[0:11]
+    ffinal = final.iloc[0:6]
 
     fffinal = ffinal['맥주명'].to_list()
     print(fffinal)
@@ -318,7 +318,7 @@ def search_detail(request, pk):
     # ---------------------
     if fffinal:
         name_list = name_list.filter(
-            Q(name__in=fffinal))[:10]
+            Q(name__in=fffinal))[:5]
 
     return render(request, "search/search_detail.html", {
         "search_details": search_detail, "name_list": name_list

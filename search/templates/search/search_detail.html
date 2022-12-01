@@ -9,8 +9,8 @@
         .card-header{
             background-color: #FED049;
         }
-        h2{ font-weight: 400;
-            font-family: 'Ubuntu', sans-serif;
+        h2{ font-weight: 500;
+            font-family: 'Kanit', sans-serif;
         }
 
         .star-rating {
@@ -46,7 +46,7 @@
         .box {
             margin-bottom : 20px;
             padding-top : 20px;
-            padding-right : 5px;
+            padding-right : 10px;
             padding-bottom: 30px;
             padding-left: 30px;
             border : 1px solid #fd9400;
@@ -68,58 +68,67 @@
                         <div style="padding:15px;"></div>
                         <a href="{% url "search:like" search_details.id %}">
                             {% if user in search_details.like_users.all %}
-                                <i class="fa-solid fa-beer-mug-empty"> Not My Beer </i>
+                                <i class="fa-solid fa-heart-circle-minus"> Not My Beer</i>
                             {% else %}
-                                <i class="fa-solid fa-beer-mug-empty"> To My Beer </i>
+                                <i class="fa-solid fa-heart-circle-plus"> To My Beer</i>
                             {% endif %}
                         </a>
+                        <div style="padding:5px;"></div>
                         <h2> {{ search_details.name}} </h2>
                         <div style="padding:5px;"></div>
 
                         <div class='col-sm-9'>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th style="background-color: ivory">맥주이름</th>
-                                    <td>{{ search_details.name }}</td>
-                                </tr>
-                                </thead>
+                            <table class="table table-hover">
                                 <tbody>
                                 <tr>
-                                    <th style="background-color: ivory">대분류 스타일</th>
+                                    <th style="width: 200px">맥주이름</th>
+                                    <td>{{ search_details.name }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th style="width: 200px">대분류 스타일</th>
                                     <td>{{ search_details.big_kind }}</td>
                                 </tr>
                                 <tr>
-                                    <th style="background-color: ivory">소분류 스타일</th>
+                                    <th style="width: 200px">소분류 스타일</th>
                                     <td>{{ search_details.kind }}</td>
                                 </tr>
                                 <tr>
-                                    <th style="background-color: ivory">양조장 이름</th>
+                                    <th style="width: 200px">양조장 이름</th>
                                     <td>{{ search_details.brewery }}</td>
                                 </tr>
                                 <tr>
-                                    <th style="background-color: ivory">알코올 도수</th>
+                                    <th style="width: 200px">알코올 도수</th>
                                     <td>{{ search_details.abv }}%</td>
                                 </tr>
                                 <tr>
-                                    <th style="background-color: ivory">판매 상태</th>
-                                    <td>{{ search_details.status }}</td>
+                                    <th style="width: 200px">판매 상태</th>
+                                    <td>
+                                        {% if search_details.status == 'Active' %}
+                                            <h5>구매 가능</h5>
+                                        {% else %}
+                                            <h5>구매 불가</h5>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th style="background-color: ivory">평 점</th>
+                                    <th style="width: 200px">평 점</th>
                                     <td> {{ search_details.average }}</td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <h5> MY BEER 등록한 투트: {{ search_details.like_count }}</h5>
+                            <h5>
+                                <i class="fa-solid fa-beer-mug-empty"> {{ search_details.like_count }}
+                                </i></h5>
                         </div>
                     </div>
-                    <img class=img-fluid src='/static/beerimg.png' alt="My Image" style="float: right; width:380px; height:380px; position: absolute; left: 47.25%; top:20%;">
+                    <img class=img-fluid src='/static/beerimg.png' alt="My Image"
+                         style="float: right; width:360px; height:360px; position: absolute; left: 47.25%; top:42%;">
                 </div>
             </div>
             <div style="padding:5px;"></div>
             <hr style="line: solid 10px black;">
-            <div style="padding:20px;"></div>
+            <div style="padding:15px;"></div>
             <div class="card mb-2">
                 <div class="card-header">
                     <i class="fa fa-comment fa"></i> 맥주 리뷰
@@ -148,19 +157,31 @@
                 </div>
             </div>
         </div>
-
         <div class='col-sm-3'>
             <div class="box" style="border-color: white">
+                <div style="padding:5px;"></div>
                 <h3>지금 보고있는 맥주가 취향저격이라면!</h3>
                 <div style="padding:10px;"></div>
                 <table>
                     {% for na in name_list %}
-                        <tr height="90">
-                            <th style="background-color: #FED049; color: white" >{{ forloop.counter }}</th>
+                        <tbody>
+                        <tr height="92">
+                            <th style="background-color: #FED049; color: white; width: 50px" >{{ forloop.counter }}</th>
                             <td><h6><a href = "/search/beerprofile/{{ na.id }}">{{ na.name }} ( {{ na.country }} )</a></h6></td>
                         </tr>
+                        </tbody>
                     {% endfor %}
                 </table>
+                <div style="padding:10px;"></div>
+                <div class="card-HEADER">
+                    <h6 class="card-text" style="height:20px; text-align: center;">KOZEL DARK</h6>
+                </div>
+                <div class="card" style="width: 270px; height: 385px" >
+                    <img class="img-fluid" src="{% static 'kozel_dark.png' %}" alt="맥주 광고 이미지" width="300" height="450">
+                    <div class="card-BODY   ">
+                        <h6 class="card-text">코젤 다크는 다크 맥아의 독특한 혼합법을 사용한 전통 제조법으로 맥아의 향과 맛을 완벽히 보완해주어 매혹적이고 깊이 있는 갈색빛의 부드러운 카라멜 향을 선사합니다.</h6>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

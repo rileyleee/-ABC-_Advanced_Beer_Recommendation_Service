@@ -38,7 +38,7 @@
         </div>
         {% if user.is_superuser %}
             <a href="new/"><button class="btn btn-success" style="float: right" >새 이벤트 작성</button></a>
-            <div style="padding:30px;">
+            <div style="padding:30px;"></div>
         {% endif %}
         </div>
         <hr>
@@ -78,8 +78,4 @@
             {% endif %}
         </ul>
         <!-- 페이징처리 끝 -->
-        <footer class="blog-footer" style="text-align: center" >
-            <a href="/community/event" style="text-decoration-line: none;">Back to top</a>
-        </footer>
-
 {% endblock %}

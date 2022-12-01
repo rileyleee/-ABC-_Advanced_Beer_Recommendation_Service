@@ -1,4 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Gugi&family=Hahmlet:wght@100;200;300;400;500;600;700;800;900&family=Jua&family=Stylish&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Gowun+Dodum&family=Gugi&family=Hahmlet:wght@100;200;300;400;500;600;700;800;900&family=Josefin+Sans:wght@400;500&family=Jua&family=Kanit:wght@600;700&family=Lobster&family=Signika+Negative:wght@300;400;500;600;700&family=Stylish&family=Ubuntu:wght@500&display=swap');
+
+/* link - 아직 클릭하지 않은 경우 설정 */
+a:link { color: #8B4513; text-decoration: none;}
+/* visited - 한번 클릭하거나 전에 클릭한 적 있을 경우 설정 */
+a:visited { color: #8B4513; text-decoration: none;}
+/* hover - 마우스를 해당 링크에 위치했을 경우 설정 */
+a:hover { color: yellow; text-decoration: none;}
 
 body, h3, h4, h5, h6{
   font-family: 'Gowun Dodum', sans-serif;
@@ -24,9 +31,8 @@ body {
 
 th {
   color: #8B4513;
-  background: #E8D08F;
+  background: #fafafa;
   border-bottom:1px solid #8B5927;
-  border-right: 1px solid #FFFACD;
   font-size:20px;
   font-weight: 300;
   padding:15px;
@@ -38,7 +44,7 @@ th {
 tr {
   border-top: 1px solid #8B5927;
   border-bottom: 1px solid #8B5927;
-  color: #8B4513;
+  color: #8B5927;
   font-size:20px;
   font-weight:normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
@@ -52,7 +58,7 @@ td {
   font-weight:300;
   font-size:20px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #FFFACD;
+  border-right: 1px solid #fafafa;
 }
 
 body, html {cursor: url(cursor2.cur), auto;}

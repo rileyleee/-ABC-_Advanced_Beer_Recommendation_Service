@@ -40,7 +40,7 @@ def column_new(request):
         "form": form,
     })
 
-
+@login_required
 def column_edit(request, pk):
     column = Column.objects.get(pk=pk)
 
@@ -49,7 +49,7 @@ def column_edit(request, pk):
         if form.is_valid():
             # form.cleaned_data
             column = form.save()
-            messages.success(request, "successfully modified")
+            messages.success(request, "성공적으로 글이 수정되었습니다.")
 
             return redirect(f"/community/column/{column.pk}/")
     else:
@@ -79,7 +79,7 @@ def event_detail(request, pk):
                       "events": event,
                   })
 
-
+@login_required
 def event_new(request):
     if request.method == 'GET':
         form = EventForm()
