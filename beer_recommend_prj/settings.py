@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "account",
     "search",
     "community",
+    "imagekit",
 ]
 
 MIDDLEWARE = [
