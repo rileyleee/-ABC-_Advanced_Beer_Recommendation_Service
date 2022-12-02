@@ -1,0 +1,32 @@
+{% extends "community/base.html" %}
+{% load django_bootstrap5 %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+
+{% block content %}
+    <div class="container-lg">
+        <div style="padding:20px;"></div>
+        <div class="container-sm">
+            <a href="/community/board/"><button class="btn btn-success" style="float: right" >글 목록</button></a></div>
+        <div style="padding:15px;"></div>
+        <div class="container-fluid">
+            <h2>{{ boards.title }}</h2></div>
+        <div style="padding:10px;"></div>
+        <small style="float: right;">작성자: {{ boards.author }} </small>
+        {% if boards.image %}
+            <img src="{{ boards.image.url }}" class="img-fluid" width="1250" alt="작성자가 등록한 이미지입니다">
+        {% endif %}
+        <small style="float: right;">작성일시: {{ boards.created_at }}</small>
+        <hr>
+        <div style="padding:15px;"></div>
+        <div class="container-fluid">
+            {{ boards.content|safe }}
+        </div>
+        <div style="padding:15px;">
+        </div>
+        <div class="container-sm">
+            <a href="/community/board/{{ boards.pk }}/edit/"><button class="btn btn-success" style="float: right" >글 수정</button></a></div>
+        <div style="padding:20px;"></div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "community/base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+    {% bootstrap_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+    <div class="container">
+        <div style="padding:15px;"></div>
+        <table class="table">
+            <td height="250">
+                <h1>자유 게시판</h1>
+            </td>
+        </table>
+        <div style="padding:10px;"></div>
+        <a href="new/"><button class="btn btn-success" style="float: right" >새 글 작성</button></a>
+        <div style="padding:30px;"></div>
+        <table style="width: 1275px;">
+            <tr style="text-align: center">
+                <th style="background-color: #dec06a" width="100px"><b><b>공지</b></b></th>
+                <td><b><b>공지 내용</b></b></td>
+
+            </tr>
+            <tr>
+                <th style="background-color: #dec06a" width="100px"><b><b>공지</b></b></th>
+                <td style="text-align: center"><b><b>공지 내용</b></b></td>
+
+            </tr>
+            <tr>
+                <th style="background-color: #dec06a" width="100px"><b><b>공지</b></b></th>
+                <td style="text-align: center"><b><b>공지 내용</b></b></td>
+
+            </tr>
+            {% for board in pagenated_board_qu %}
+                <tr>
+                    <th style="background-color: #FED049">{{ forloop.revcounter }}</th>
+                    <td style="text-align: center;"><a href ="{{ board.pk }}/"></a>
+                        <h5 class="card-title"><a href="{{ board.pk }}/"> {{ board.title }}</a></h5>
+                    </td>
+                    <td style="text-align: right; width:290px"><h6>{{ board.created_at }}</h6></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div style="padding:20px;">
+            <div style="padding:10px;">
+            </div>
+            <hr>
+            <!-- 페이징처리 시작 -->
+            <ul class="pagination justify-content-center">
+                <!-- 이전페이지 -->
+                {% if pagenated_board_qu.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ pagenated_board_qu.previous_page_number }}">이전</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                    </li>
+                {% endif %}
+                <!-- 페이지리스트 -->
+                {% for page_number in pagenated_board_qu.paginator.page_range %}
+                    {% if page_number == pagenated_board_qu.number %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <!-- 다음페이지 -->
+                {% if pagenated_board_qu.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ pagenated_board_qu.next_page_number }}">다음</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <!-- 페이징처리 끝 -->
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "account/base.html" %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+
+{% block content %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-2 p-2">
+                <div id="sidebar" class="border-top border-secondary">
+
+                    <div class="list-group">
+                        <a class="rounded-0 list-group-item list-group-item-action list-group-item-light" href="/account/mypage">프로필 페이지</a>
+                        <a class="rounded-0 list-group-item list-group-item-action list-group-item-light" href="/account/mybeerlist">나의 맥주 페이지</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-10 p-2" >
+                <div id="content" class="border-top border-secondary">
+                    <div style="padding:20px;"></div>
+                    <h2>'{{ person.username }}'(이)가 추가한 맥주</h2>
+                    <div style="padding:20px;"></div>
+                    {% for beer in mybeers %}
+                        <div class="card" style="width:700px; height: 95px">
+                            {#                            <img src="..." class="card-img-top" alt="...">#}
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="/search/beerprofile/{{ beer.id }}/">{{ beer.name }}</a></h5>
+                                <p class="card-text"><h6>양조장 이름: {{ beer.brewery }}</h6></p>
+                                {#                                <a href="/search/beerprofile/{{ beer.id }}/" class="btn btn-success">맥주 보러가기</a>#}
+                            </div>
+                        </div>
+                        <div style="padding:10px;"></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

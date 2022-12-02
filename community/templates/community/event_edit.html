@@ -1,0 +1,17 @@
+{% extends "community/base.html" %}
+{% load django_bootstrap5 %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+{% block content %}
+
+    </hr>
+    <div class="container">
+        <h2 class="my-3 border-bottom pb-2">이벤트 수정하기</h2>
+
+        <form action ="" method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-success" style="float: right">편집 완료 및 저장</button>
+        </form>
+    </div>
+{% endblock %}
