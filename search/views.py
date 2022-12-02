@@ -203,7 +203,6 @@ def predict(request):
 
 @login_required
 def search_detail(request, pk):
-    name_list = ''
 
     search_detail = Beer.objects.get(id=pk)
 
