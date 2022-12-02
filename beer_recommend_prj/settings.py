@@ -85,10 +85,10 @@ WSGI_APPLICATION = "beer_recommend_prj.wsgi.application"
 DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.mysql',
-        "NAME": 'homestead',
-        'USER': 'homestead',
-        'PASSWORD': 'secret',
-        'HOST': '127.0.0.1',
+        'HOST' : 'beerprojdb.ccrozmj7fzhu.ap-northeast-1.rds.amazonaws.com',
+        "NAME": 'beerprojdb',
+        'USER': 'beer',
+        'PASSWORD': 'beerbeer',
         'PORT': '3306',
     }
 }

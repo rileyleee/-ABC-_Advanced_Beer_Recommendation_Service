@@ -13,6 +13,7 @@ Roggenbier
 ScottishAle
 WinterWarmer
 AmericanAmberRedLager
+CzechAmberLager
 CzechDarkLager
 EuropeanDarkLager
 Märzen
@@ -62,10 +63,10 @@ KellerbierZwickelbier
 LightLager
 MaltLiquor
 AmericanPorter
+RobustPorter
 BalticPorter
 EnglishPorter
 ImperialPorter
-RobustPorter
 SmokedPorter
 ChileBeer
 FruitandFieldBeer
@@ -88,6 +89,17 @@ IrishDryStout
 RussianImperialStout
 SweetMilkStout
 AmericanBarleywine
+AmericanStrongAle
+BelgianDarkStrongAle
+BelgianPaleStrongAle
+EnglishBarleywine
+EnglishStrongAle
+ImperialRedAle
+OldAle
+QuadrupelQuad
+ScotchAleWeeHeavy
+Tripel
+Wheatwine
 AmericanDarkWheatBeer
 AmericanPaleWheatBeer
 Dunkelweizen
