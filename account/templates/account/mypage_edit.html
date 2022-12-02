@@ -5,7 +5,7 @@
 {% block content %}
 
     <div class="container my-3">
-        <form method="post" action="{% url 'account:mypage_edit' %}">
+        <form method="post" novalidate enctype="multipart/form-data" action="{% url 'account:mypage_edit' %}">
             {% csrf_token %}
             {% bootstrap_form form %}
             <button type="submit" class="btn btn-success" style="float: right">수정사항 저장</button>

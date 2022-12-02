@@ -1,11 +1,11 @@
 from django import forms
-from community.models import Column, Event
+from community.models import Column, Event, Board
 
 
 class ColumnForm(forms.ModelForm):
     class Meta:
         model = Column
-        fields = ['title', 'content', 'image',]
+        fields = ['title', 'content', 'image', ]
         labels = {
             'title': '컬럼 제목',
             'content': '컬럼 내용',
@@ -22,4 +22,16 @@ class EventForm(forms.ModelForm):
             'title': '이벤트 제목',
             'content': '이벤트 내용',
             'image': '이벤트 이미지',
+        }
+
+
+class BoardForm(forms.ModelForm):
+    class Meta:
+        model = Board
+        fields = ['title', 'content', 'image', ]
+        labels = {
+            'title': '자유 게시판 제목',
+            'content': '자유 게시판 내용',
+            'image': '자유 게시판 이미지',
+            'author': '작성자',
         }

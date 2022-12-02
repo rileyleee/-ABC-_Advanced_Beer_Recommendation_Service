@@ -7,19 +7,66 @@
 {% block content %}
     <div class="container mt-3">
         <div class="row">
-            <div class="col-sm-12 col-md-3 col-lg-2 p-2">
+            <div class="col-sm-12 col-md-4 col-lg-2 p-2">
                 <div id="sidebar" class="border-top border-secondary">
-                    <div class="list-group">
-                        <a class="rounded-0 list-group-item list-group-item-action list-group-item-light" href="/account/mypage">프로필 페이지</a>
-                        <a class="rounded-0 list-group-item list-group-item-action list-group-item-light" href="/account/mybeerlist">나의 맥주 페이지</a>
+                    <div id="content">
+                        <div style="padding:25px;"></div>
+                        <h4 style="text-align: center"><b>내가 추가한 맥주</b></h4>
+                        <div style="padding:20px;"></div>
+                        {% for beer in pagenated_mybeers %}
+                            <div class="card" style="width:200px; height: 55px">
+                                <div class="card-body">
+                                    <h6 class="card-title"><a href="/search/beerprofile/{{ beer.id }}/">{{ beer.name }}</a></h6>
+                                </div>
+                            </div>
+                            <div style="padding:5px;"></div>
+                        {% endfor %}
                     </div>
                 </div>
+                <!-- 페이징처리 시작 -->
+                <ul class="pagination justify-content-sm-end">
+                    <!-- 이전페이지 -->
+                    {% if pagenated_mybeers.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?/account/mypage/&page={{ pagenated_mybeers.previous_page_number }}"><</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#"><</a>
+                        </li>
+                    {% endif %}
+                    <!-- 페이지리스트 -->
+                    {% for page_number in pagenated_mybeers.paginator.page_range %}
+                        {% if page_start_number <= page_number and page_end_number >= page_number %}
+                            {% if page_number == pagenated_mybeers.number %}
+                                <li class=pagination-number" aria-current="page">
+                                    <a class="page-link" href="?/account/mypage/&page={{ page_number }}">{{ page_number }}</a>
+                                </li>
+                            {% else %}
+                                <li class="pagination-number">
+                                    <a class="page-link" href="?/account/mypage/&page={{ page_number }}">{{ page_number }}</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <!-- 다음페이지 -->
+                    {% if pagenated_mybeers.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?/account/mypage/&page={{ pagenated_mybeers.next_page_number }}">></a></li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">></a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <!-- 페이징처리 끝 -->
 
             </div>
-            <div class="col-sm-12 col-md-9 col-lg-10 p-2">
+            <div class="col-sm-12 col-md-8 col-lg-10 p-2">
                 <div id="content" class="border-top border-secondary">
-                    <div class="container-lg" style = "padding: 10px;" >
-                        <h2 class="wrap-tit" >프로필 페이지</h2>
+                    <div class="container-lg" style = "padding: 10px;">
+                        <div style="padding:20px;"></div>
+                        <h2 class="wrap-tit" style="text-align: center">ㅤㅤㅤㅤ ㅤㅤ프로필 페이지</h2>
                         <div style="padding:20px;"></div>
                         <div class="container text-center">
                             <div class="row">
@@ -34,21 +81,21 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th style="background-color: ivory" >사용자 이름</th>
+                                            <th>사용자 이름</th>
                                             <td>{{ person.username }}</td>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <th style="background-color: ivory" >Best Beer</th>
+                                            <th>Best Beer</th>
                                             <td>{{ person.bestbeer }}</td>
                                         </tr>
                                         <tr>
-                                            <th style="background-color: ivory">이메일 주소</th>
+                                            <th>이메일 주소</th>
                                             <td>{{ person.email }}</td>
                                         </tr>
                                         <tr>
-                                            <th style="background-color: ivory">성별</th>
+                                            <th>성별</th>
                                             <td>{% if person.gender == 0 %}
                                                 <h5>남성</h5>
                                             {% else %}
@@ -56,53 +103,22 @@
                                             {% endif %}</td>
                                         </tr>
                                         <tr>
-                                            <th style="background-color: ivory">나이</th>
+                                            <th >나이</th>
                                             <td>{{ person.age }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="background-color: ivory">나의 맥주</th>
-                                            <td> <a href="/account/mybeerlist">'나의 맥주'로 이동</a></td>
                                         </tr>
                                         </tbody>
                                     </table>
+                                    <h2>
+                                        <a href="/account/mypage_edit"><button class="btn btn-success" style="float: right" >개인정보 수정</button></a>
+                                    </h2>
                                 </div>
                             </div>
                         </div>
-                        <div style="padding:20px;"></div>
-                        <h2>
-                            <a href="/account/mypage_edit"><button class="btn btn-success" style="float: right" >개인정보 수정</button></a>
-                        </h2>
-                        <div style="padding:20px;"></div>
+                        <div style="padding:10px;"></div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{#{% endblock %}#}

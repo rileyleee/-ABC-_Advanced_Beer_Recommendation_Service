@@ -1,5 +1,5 @@
 from django.contrib import admin
-from community.models import Column, Event
+from community.models import Column, Event, Board
 
 
 # @admin.register(Column)
@@ -9,3 +9,4 @@ from community.models import Column, Event
 
 admin.site.register(Column)
 admin.site.register(Event)
+admin.site.register(Board)

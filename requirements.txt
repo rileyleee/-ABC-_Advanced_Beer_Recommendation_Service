@@ -11,3 +11,5 @@ scikit-learn~=1.1.3
 mysqlclient==2.1.1
 keras==2.11.0
 tensorflow==2.11.0
+numpy~=1.23.5
+pilkit~=2.0

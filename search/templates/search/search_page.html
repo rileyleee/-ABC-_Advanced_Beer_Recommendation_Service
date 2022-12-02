@@ -24,20 +24,16 @@
             left: 0;
             min-width: 100%;
             height: 500px;
+
         }
     </style>
-
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://cdn.pixabay.com/photo/2016/09/18/20/51/cans-1679022_960_720.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="https://cdn.pixabay.com/photo/2015/12/03/13/26/beer-1074950_960_720.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="https://cdn.pixabay.com/photo/2017/07/12/22/13/beer-2498543_960_720.jpg" class="d-block w-100" alt="...">
-            </div>
+    <div style="padding:50px;"></div>
+    <div class="card text-bg-dark">
+        <img src="{% static 'hy.gif' %}" alt="맥주 광고 이미지" class="card-img" width="400" height="400">
+        <div class="card-img-overlay">
+            <h5 class="card-title" style="color: black"><b>고된 하루,</b></h5>
+            <h5 class="card-title" style="color: black"><b>맥주 구독 서비스를 신청하시면</b></h5>
+            <h5 class="card-title" style="color: black"><b>매일 매일 새로운 맥주가 문 앞에!</b></h5>
         </div>
     </div>
     <div style="padding:6px;"></div>
@@ -47,7 +43,7 @@
                 <div class="row">
                     <div class="col">
                         <div class='filter-item'>
-                            <ul class='box-view; flex-sm-wrap;'>
+                            <ul class='box-view; flex-sm-wrap;' style="text-align: center;">
                                 <h3><span >맥주 종류</span></h3>
                                 <div style="padding:20px;"></div>
                                 <div class="float-center">
@@ -57,30 +53,29 @@
                                     <input id='field-india-pale-ales' name='chCategory' value="India Pale Ales" type='checkbox'>
                                     <label for='field-india-pale-ales'>
                                         <h6> &nbsp;India Pale Ales</h6></label>
-                                </div>
-
-                                <div style="padding:6px;"></div>
-
-                                <div class="float-center">
                                     <input id='field-stouts' name='chCategory' value="Stouts" type='checkbox'>
                                     <label for='field-stouts'>
                                         <h6> &nbsp;Stouts</h6></label>
-                                    <input id='field-pale-lagers' name='chCategory' value="Pale Lagers" type='checkbox'>
-                                    <label for='field-pale-lagers'>
-                                        <h6> &nbsp;Pale Lagers</h6></label>
                                 </div>
 
                                 <div style="padding:6px;"></div>
 
                                 <div class="float-center">
+                                    <input id='field-pale-lagers' name='chCategory' value="Pale Lagers" type='checkbox'>
+                                    <label for='field-pale-lagers'>
+                                        <h6> &nbsp;Pale Lagers</h6></label>
                                     <input id='field-wild/sour-beers' name='chCategory' value="Wild/Sour Beers" type='checkbox'>
                                     <label for='field-wild/sour-beers'>
                                         <h6> &nbsp;Wild/Sour Beers</h6></label>
                                 </div>
+                                <div style="padding:6px;"></div>
                                 <div class="float-center">
                                     <input id='field-specialty-beers' name='chCategory' value="Specialty Beers" type='checkbox'>
                                     <label for='field-specialty-beers'>
                                         <h6> &nbsp;Specialty Beers</h6></label>
+                                    <input id='field-porters' name='chCategory' value="Porters" type='checkbox'>
+                                    <label for='field-porters'>
+                                        <h6> &nbsp;Porters</h6></label>
                                 </div>
 
                                 <div style="padding:6px;"></div>
@@ -92,22 +87,17 @@
                                     <input id='field-wheat-beers' name='chCategory' value="Wheat Beers" type='checkbox'>
                                     <label for='field-wheat-beers'>
                                         <h6> &nbsp;Wheat Beers</h6></label>
-                                </div>
-
-                                <div style="padding:6px;"></div>
-
-                                <div class="float-center">
                                     <input id='field-dark-lagers' name='chCategory' value="Dark Lagers" type='checkbox'>
                                     <label for='field-dark-lagers'>
                                         <h6> &nbsp;Dark Lagers</h6></label>
-                                    <input id='field-brown-ales' name='chCategory' value="Brown Ales" type='checkbox'>
-                                    <label for='field-brown-ales'>
-                                        <h6> &nbsp;Brown Ales</h6></label>
                                 </div>
 
                                 <div style="padding:6px;"></div>
 
                                 <div class="float-center">
+                                    <input id='field-brown-ales' name='chCategory' value="Brown Ales" type='checkbox'>
+                                    <label for='field-brown-ales'>
+                                        <h6> &nbsp;Brown Ales</h6></label>
                                     <input id='field-bocks' name='chCategory' value="Bocks" type='checkbox'>
                                     <label for='field-bocks'>
                                         <h6> &nbsp;Bocks</h6></label>
@@ -132,33 +122,58 @@
                     </div>
                     <div class="col">
                         <div class='filter-item'>
-                            <ul class='box-view'>
+                            <ul class='box-view' style="text-align: center;">
                                 <h3><span>국가</span></h3>
                                 <div style="padding:20px;"></div>
-                                <div class=''><input id='field-usa' name='chCountry' value="United States" type='checkbox'>
-                                    <label for='field-usa'><h6>미국</h6></label></div>
+                                <div class=''>
+                                    <input id='field-usa' name='chCountry' value="United States" type='checkbox'>
+                                    <label for='field-usa'><h6>미국</h6></label>
+                                    ㅤㅤㅤㅤ
+                                    <input id='field-belgique' name='chCountry' value="Belgium" type='checkbox'>
+                                    <label for='field-belgique'><h6>벨기에</h6></label>
+                                </div>
                                 <div style="padding:6px;"></div>
-                                <div class=''><input id='field-belgique' name='chCountry' value="Belgium" type='checkbox'>
-                                    <label for='field-belgique'><h6>벨기에</h6></label></div>
+                                <div class=''>
+                                    <input id='field-germany' name='chCountry' value="Germany" type='checkbox'>
+                                    <label for='field-germany'><h6>독일</h6></label>
+                                    ㅤㅤㅤㅤ
+                                    <input id='field-canada' name='chCountry' value="Canada" type='checkbox'>
+                                    <label for='field-canada'><h6>캐나다</h6></label>
+                                </div>
                                 <div style="padding:6px;"></div>
-                                <div class=''><input id='field-germany' name='chCountry' value="Germany" type='checkbox'>
-                                    <label for='field-germany'><h6>독일</h6></label></div>
+                                <div class=''>
+                                    <input id='field-UK' name='chCountry' value="United Kingdom" type='checkbox'>
+                                    <label for='field-UK'><h6>영국</h6></label>
+                                    ㅤㅤㅤㅤ
+                                    <input id='field-denmark' name='chCountry' value="Denmark" type='checkbox'>
+                                    <label for='field-denmark'><h6>덴마크</h6></label>
+                                </div>
                                 <div style="padding:6px;"></div>
-                                <div class=''><input id='field-UK' name='chCountry' value="United Kingdom" type='checkbox'>
-                                    <label for='field-UK'><h6>영국</h6></label></div>
-                                <div style="padding:6px;"></div>
-                                <div class=''><input id='field-canada' name='chCountry' value="Canada" type='checkbox'>
-                                    <label for='field-canada'><h6>캐나다</h6></label></div>
-                                <div style="padding:6px;"></div>
-                                <div class=''><input id='field-denmark' name='chCountry' value="Denmark" type='checkbox'>
-                                    <label for='field-denmark'><h6>덴마크</h6></label></div>
-                                <div style="padding:6px;"></div>
-                                <div class=''><input id='field-netherlands' name='chCountry' value="Netherlands" type='checkbox'>
+                                <div class=''>
+                                    <input id='field-Czech Republic' name='chCountry' value="Czech Republic" type='checkbox'>
+                                    <label for='field-Czech Republic'><h6>체코</h6></label>
+                                    ㅤㅤㅤㅤ
+                                    <input id='field-netherlands' name='chCountry' value="Netherlands" type='checkbox'>
                                     <label for='field-netherlands'><h6>네덜란드</h6></label></div>
+                                <div style="padding:6px;"></div>
+                                <div class=''>
+                                    <input id='field-Australia' name='chCountry' value="Australia" type='checkbox'>
+                                    <label for='field-Australia'><h6>호주</h6></label>
+                                    ㅤㅤㅤㅤ
+                                    <input id='field-Ireland' name='chCountry' value="Ireland" type='checkbox'>
+                                    <label for='field-Ireland'><h6>아일랜드</h6></label></div>
+                                <div style="padding:6px;"></div>
+                                <div class=''>
+                                    <input id='field-France' name='chCountry' value="France" type='checkbox'>
+                                    <label for='field-France'><h6>프랑스</h6></label>
+                                    ㅤㅤㅤ
+                                    <input id='Mexico' name='chCountry' value="Mexico" type='checkbox'>
+                                    <label for='Mexico'><h6>멕시코</h6></label></div>
                             </ul>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-danger">Search</button>
+                    <div style="padding:10px;"></div>
+                    <button type="submit" class="btn btn-danger" style="background-color: #000080">Search</button>
                 </div>
             </div>
         </form>

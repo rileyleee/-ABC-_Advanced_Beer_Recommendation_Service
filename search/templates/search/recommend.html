@@ -52,23 +52,31 @@
             color: transparent; /* 기존 이모지 컬러 제거 */
             text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
         }
+        table {
+            margin-left:auto;
+            margin-right:auto;
+        }
     </style>
     <body>
     <div class="container-lg">
-        <div id="body-wrapper">
+        <div>
             <table class="table">
                 <td height="250">
                     <h1>맥주 추천이 필요하신가요?</h1>
                     <div style="padding:10px;"></div>
-                    <h4>연봉 2조만의 특별한 기술로 당신에게 꼭 맞는 맥주 스타일을 추천해 드립니다</h4>
+                    <h4>two_trillionaires만의 특별한 기술로 당신에게 꼭 맞는 맥주 스타일을 추천해 드립니다</h4>
                 </td>
             </table>
             <div class="col">
                 <div style="float: left;">
                     <form action="" method="get">
                         <div class='filter-item'>
-                            <h4><span>ㅤ회원님만의 맥주 스타일 추천!</span></h4>
                             <table>
+                                <tr>
+                                    <div class='container'>
+                                        <td><span class="ft-16"><h4>특성 선택해라</h4></span></td>
+                                    </div>
+                                </tr>
                                 <tr>
                                     <div class='container'>
                                         <td><span class="ft-16"><h4>ㅤ당도</h4></span></td>
@@ -188,54 +196,54 @@
                                 </tr>
                             </table>
                             <div style="padding:15px;"></div>
-                            <button type="submit" name="style" class="btn btn-primary" style="float: right;"><h3>결과 보기</h3></button>
+                            <button type="submit" name="style" class="btn btn-primary" style="float: right; background-color: #FED049"><h3 style="color: #1b1b1b">결과 보기</h3></button>
                         </div>
                         <div>
                         </div>
                     </form>
                 </div>
+                <div class='row'>
+                    {% if predict_beer %}
+                        <div class="child", style="float:left">
+                            ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
+                        </div>
 
-                {% if predict_beer %}
-                    <div class="child", style="float:left">
-                        ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
-                    </div>
-
-                    <div class="child", style="float:left">
-                        <h2>
-                            <b>당신에게 꼭 맞는 맥주 </b>
-                        </h2>
-                        <br>
-                        <h3 style="color: #8B4513">
-                            <div style="padding:10px;"></div>
-                            <b>{{ predict_beer }}</b>
-                        </h3>
-                        <div style="padding:10px;"></div>
-                        <table>
-                            {% for na in prename_list %}
-                                <tr height="70">
-                                    <th>{{ forloop.counter }}</th>
-                                    <td><h6><a href = "/search/beerprofile/{{ na.id }}">{{ na.name }}({{ na.country }})</a></h6></td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-                    </div>
-                {% else %}
-                    <div class="child", style="float:left">
-                        ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
-                    </div>
-                    <div class="child">
-                        <table>
-                            <div class="card" style="width: 18rem;">
-                                <img class="img-fluid" src="{% static '스텔라 광고.jpg' %}" alt="맥주 광고 이미지" width="300">
-                                <div class="card-body">
-                                    <p class="card-text">'650년 전통의 스텔라 아르투아' ‘스텔라’는 라틴어로 별을 의미하며, ‘아르투아’는 브루마스터였던 세바스찬 아르투아 (Sebastian Artois)의 이름에서 유래하였습니다. 병마다 새겨진 별은 스텔라 아르투아가 탄생한 크리스마스의 빛나는 순간을 나타냅니다. 스텔라 아르투아와 올 겨울 크리스마스를 함께하세요.</p>
-                                </div>
-                            </div>
-                        </table>
-                    </div>
-                {% endif %}
+                        <div class="child", style="float:left">
+                            <h3 style="text-align:center;">
+                                <b>당신에게 꼭 맞는 맥주</b>
+                            </h3>
+                            <div style="padding:6px;"></div>
+                            <h3 style="color: #8B4513; text-align:center;">
+                                <b>{{ predict_beer }}</b><br>
+                                <div style="padding:3px;"></div>
+                            </h3>
+                            <div style="padding:5px;"></div>
+                            <h4 style="text-align:center;">이런 맥주 좋아하실 것 같아요!</h4>
+                            <div style="padding:5px;"></div>
+                            <table style="text-align: center;" width="500px">
+                                {% for na in prename_list %}
+                                    <tr height="50">
+                                        <th style="background-color: #FED049">{{ forloop.counter }}</th>
+                                        <td><h6><a href = "/search/beerprofile/{{ na.id }}">{{ na.name }}({{ na.country }})</a></h6></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    {% else %}
+                        </div>
+                        <div class="child">
+                            ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
+                        </div>
+                        <div style="padding:90px;"></div>
+                        <h4 style="text-align: center;">취향에 맞는 특성을 입력해 주세요!</h4>
+                        <h5 style="text-align: center;">two_trillionaires는 약 8000개의 맥주 중 당신의 취향을 저격한 맥주를 찾아 드립니다</h5>
+                        <div style="padding:130px;"></div>
+                    {% endif %}
             </div>
         </div>
+    </div>
+    <div>
+    </div>
     </div>
     </body>
 {% endblock %}
